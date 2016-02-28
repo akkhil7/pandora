@@ -15,7 +15,7 @@ class UserRegister extends React.Component{
 		var username  = this.refs.username.value 
 		var password  = this.refs.password.value
 
-			var passingobj={
+			var user={
 				first_name: firstName,
 				last_name: lastName,
 				email: email,
@@ -24,7 +24,7 @@ class UserRegister extends React.Component{
 			}
 
 			Request.post("http://localhost:3000/users")
-			.send({passingobj})
+			.send({user:user})
 			.end((err,res) => {
 			console.log(res)
 			if(res.status==200)
