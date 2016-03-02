@@ -13,7 +13,6 @@ class App extends React.Component {
     return (
       <div className="wrapper">
         <RouteHandler />
-	      <h2> Welcome </h2>
       </div>
     )
   }

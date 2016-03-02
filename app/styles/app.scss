@@ -51,3 +51,15 @@ html {
    -webkit-filter: blur(3px);
     -webkit-transform: translate3d(0, 0, 0);
 }
+.login{
+  @include span-columns(5.5);
+  @include shift(3.25);
+  background-color: rgba(255,255,255,0.6);
+  border-radius: 6px;
+  position: fixed;
+  padding: 15px;
+  margin-top: 13%;
+  z-index: 9999;
+  box-shadow:1px 1px 1px 1px grey;
+  filter: alpha(opacity=60); 
+}
