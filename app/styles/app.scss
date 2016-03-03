@@ -48,7 +48,7 @@ html {
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-image: url("http://pre13.deviantart.net/7f59/th/pre/i/2010/062/1/4/panoramic_landscape_by_compot_stock.jpg");
-   -webkit-filter: blur(3px);
+   -webkit-filter: blur(2px);
     -webkit-transform: translate3d(0, 0, 0);
 }
 .login{
@@ -58,8 +58,20 @@ html {
   border-radius: 6px;
   position: fixed;
   padding: 15px;
-  margin-top: 13%;
+  margin-top: 18%;
   z-index: 9999;
   box-shadow:1px 1px 1px 1px grey;
   filter: alpha(opacity=60); 
+}
+
+.login-bg{
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  z-index: 1;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-image: url("http://pre13.deviantart.net/7f59/th/pre/i/2010/062/1/4/panoramic_landscape_by_compot_stock.jpg");
+  -webkit-filter: blur(2px);
+  -webkit-transform: translate3d(0, 0, 0);
 }
