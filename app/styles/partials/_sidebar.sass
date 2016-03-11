@@ -1,0 +1,47 @@
+.Navbar
+  +span-columns(12 of 12)
+  background-color: #6ed3cf
+  height: 50px
+
+
+.Navbar-contents
+  +span-columns(10)
+  +shift(1)
+  padding: 0px 
+  color: #e9ece5
+  height: 100%
+
+  h2
+    +span-columns(6)
+    +omega()
+    text-align: right
+    font-size: 1.2em
+  h6
+    +span-columns(6)
+    text-align: left
+    font-size: 1.2em
+    font-weight: 400
+
+  .logo
+    margin-top: 12px
+    transition: color 500ms ease-in
+
+  .logo:hover
+    color: #e9ece5
+
+
+
+  li
+    +span-columns(1.5)
+    +omega()
+    height: 100%
+    text-align: center
+    transition: all 0.5s ease-in
+    line-height: 3
+    fond-weight: 100
+
+  li:not(.logo):hover
+  	background-color: #a6f8b0
+
+  
+

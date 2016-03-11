@@ -1,8 +1,7 @@
-
-
 @import "bourbon/bourbon";
 @import "neat/neat";
 @import "base/base";
+@import "partials/sidebar.sass";
 
 
 * {
@@ -11,6 +10,9 @@
   box-sizing: border-box;
 }
 
+#app{
+  height: 100%;
+}
 
 body {
   font-family: 'Helvetica', 'Arial';
