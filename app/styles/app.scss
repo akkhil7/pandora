@@ -4,7 +4,11 @@
 @import "partials/sidebar.sass";
 @import "partials/searchcode.sass";
 @import "react-select/default.scss";
+@import "partials/coderesult.sass";
 
+input:focus {
+  outline: none;
+}
 
 * {
   margin: 0;
