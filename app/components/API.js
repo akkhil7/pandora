@@ -40,10 +40,11 @@ var API = {
 	},
 
 	post: function(url,data,success,failure) {
-		var url = url;
 		var _this = this;
-        Request.post(url,data)
-        .end((err,res) => {
+		console.log(data)
+        Request.post(url)
+        .send(data)
+        .end(function (err,res) {
         	_this.handleRequest(res,success,failure)
         }) 
 	},

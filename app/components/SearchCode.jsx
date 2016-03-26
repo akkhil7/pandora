@@ -14,53 +14,57 @@ class SearchCode extends React.Component{
 		}
 	}
 
-	componentDidMount() {
-		var url = API.url('users')
-		var success = function(res) {
-			console.log(res)
-		}
-		var failure = function(res) {
-			console.log(res)
-		}
-		API.get(url,success,failure);
-	}
+		
 	handleSubmit(e) {
 		e.preventDefault();
 		this.setState({isSearching:true})
 
 		var difficulty = this.state.difficulty
 		var language = this.state.language
-		var keyword = this.refs.keyword
+		var keyword = this.refs.keyword.value
 
 		var _data  = {
+
 			difficulty: difficulty,
 			language: language,
 			keyword: keyword
+		
 		}
 		
-
-
+		var url = API.url('codes/search')
+		var success = function(res) {
+			console.log(res)
+		}
+		var failure = function(res) {
+			console.log(res)
+		}
+		API.post(url,_data,success,failure);
+	
+      
 	}
 	changeLang(val) {
-		this.setState({ difficulty: val})
+		this.setState({ language: val})
+		console.log(val)
 	}
 	changeDiff(val) {
-		this.setState({ language: val})
+		this.setState({ difficulty: val})
 	}
 	render(){
 
 		var options = [
-		{ value: 'one', label: 'Ruby' },
-		{ value: 'two', label: 'Python' }
+		{ value: 'ruby', label: 'Ruby' },
+		{ value: 'python', label: 'Python' }
 		];
 
-		var doptions=[
-		{ value: 'one', label: 'Easy'},
-		{ value: 'two', label: 'Medium'},
-		{ value: 'three', label: 'Hard'}
+		var d_options=[
+		{ value: 'easy', label: 'Easy'},
+		{ value: 'medium', label: 'Medium'},
+		{ value: 'hard', label: 'Hard'}
 		];
         
 		var display_none = <h2> No Results </h2>
+		var language = this.state.language
+		var difficulty = this.state.difficulty
 
 		var display = this.state.isSearching ? <CodeResultList /> : display_none
 
@@ -76,21 +80,21 @@ class SearchCode extends React.Component{
 
 
 					<Select
-					name="form-field-name"
+					name="language-selectname"
 					className='select'
-					value="one"
+					value={language}
 					onChange={this.changeLang.bind(this)}
 					searchable={false}
 					options={options}
 					/>
 
 					<Select
-					name="form-field-name"
+					name="difficulty-select"
 					className='select'
 					onChange={this.changeDiff.bind(this)}
 					searchable={false}
-					value="one"
-					options={doptions}
+					value={difficulty}
+					options={d_options}
 					/>
 
 
