@@ -9,12 +9,14 @@ class CodeResultList extends React.Component{
 	}
 
 	render(){
-		//var display = results.map(function(result) {
-		//	return <CodeResultBox code={result} />
-		//})
+		var codes = this.props.codes
+		console.log(codes)
+		var display = codes.map(function(code) {
+			return <CodeResultBox code={code} />
+		})
 		return(
 			<div className="code-result-list">
-              
+               { display }
 			</div>
 			)
 	}	

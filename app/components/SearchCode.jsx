@@ -3,6 +3,7 @@ import Router from 'react-router';
 import Request from 'superagent';
 import UserNavbar from './UserNavbar.jsx';
 import Select from 'react-select';
+import _ from 'lodash';
 import CodeResultList from './CodeResultList.jsx';
 import API from './API.js';
 
@@ -13,7 +14,6 @@ class SearchCode extends React.Component{
 			isSearching:false
 		}
 	}
-
 		
 	handleSubmit(e) {
 		e.preventDefault();
@@ -30,17 +30,18 @@ class SearchCode extends React.Component{
 			keyword: keyword
 		
 		}
-		
+
+		var _this = this
 		var url = API.url('codes/search')
 		var success = function(res) {
 			console.log(res)
+			_this.setState({result : res})
 		}
 		var failure = function(res) {
-			console.log(res)
+			console.log(res) 
 		}
 		API.post(url,_data,success,failure);
-	
-      
+
 	}
 	changeLang(val) {
 		this.setState({ language: val})
@@ -66,7 +67,7 @@ class SearchCode extends React.Component{
 		var language = this.state.language
 		var difficulty = this.state.difficulty
 
-		var display = this.state.isSearching ? <CodeResultList /> : display_none
+		var display = !_.isEmpty(this.state.result) ? <CodeResultList codes={this.state.result} /> : display_none
 
 		return(
 			<div>

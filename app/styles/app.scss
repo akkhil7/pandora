@@ -20,6 +20,30 @@ input:focus {
   height: 100%;
 }
 
+.easy {
+  background-color: #9cece9;
+}
+.hard {
+  background-color: #409995;
+}
+.medium {
+  background-color: #6dc6c2;
+}
+.red {
+  background-color: red;
+}
+
+.green {
+  background-color: green;
+}
+
+.yellow {
+  background-color: yellow;
+}
+
+.grey {
+  background-color : #ccc
+}
 body {
   font-family: 'Helvetica', 'Arial';
   height: 100%;
@@ -32,6 +56,7 @@ html {
 
 .wrapper  {
   height: 100%;
+  @include span-columns(12 of 12);
   width: 100%;
 }
 
