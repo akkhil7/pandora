@@ -73,10 +73,9 @@ class SearchCode extends React.Component{
 			<div>
 				<UserNavbar />
 				<div className="search-wrapper">
-					<h1>Search Codes</h1>
-					<h2>Keyword</h2>
-					<h2>Language</h2>
-					<h2>Difficulty</h2>
+				      <h2>Keyword</h2>
+					  <h2>Language</h2>
+					  <h2>Difficulty</h2>
 					<input ref="keyword" type="text" placeholder="Enter keyword" />
 
 
