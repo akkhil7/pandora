@@ -5,6 +5,8 @@
 @import "partials/searchcode.sass";
 @import "react-select/default.scss";
 @import "partials/coderesult.sass";
+@import "partials/createcode.sass";
+@import "partials/filterbar.sass";
 
 input:focus {
   outline: none;
@@ -34,7 +36,7 @@ input:focus {
 }
 
 .green {
-  background-color: green;
+  background-color: #77ff94;
 }
 
 .yellow {
@@ -52,6 +54,9 @@ body {
   color: #444;
 }
 
+.dashboard{
+  height: 100%;
+}
 html {
   height: 100%;
 }

@@ -5,6 +5,7 @@ import UserRegister from './components/UserRegister.jsx';
 import UserLogin from './components/UserLogin.jsx';
 import UserDashBoard from './components/UserDashBoard.jsx';
 import SearchCode from './components/SearchCode.jsx';
+import CreateCode from './components/CreateCode.jsx';
 
 
 var routes = (
@@ -13,6 +14,7 @@ var routes = (
   	<Route name="user-login" path="/user/login" handler={ UserLogin } />
   	<Route name="user-dashboard" path="/user/dashboard" handler={ UserDashBoard } />
   	<Route name="user-searchcode" path="/user/searchcode" handler={ SearchCode } />
+  	<Route name="user-createcode" path="/user/createcode" handler={ CreateCode } />
   </Route>
 );
 
