@@ -6,6 +6,7 @@ import Select from 'react-select';
 import _ from 'lodash';
 import CodeResultList from './CodeResultList.jsx';
 import API from './API.js';
+import Filterbar from './Filterbar.jsx';
 
 class SearchCode extends React.Component{
 	constructor(){
@@ -70,7 +71,7 @@ class SearchCode extends React.Component{
 		var display = !_.isEmpty(this.state.result) ? <CodeResultList codes={this.state.result} /> : display_none
 
 		return(
-			<div>
+			<div className="search-code-container">
 				<UserNavbar />
 				<div className="search-wrapper">
 				      <h2>Keyword</h2>
@@ -103,6 +104,7 @@ class SearchCode extends React.Component{
 					className="search-button"> Search </button>
 
 				</div>
+				<Filterbar />
 				{display}
 			</div>
 
