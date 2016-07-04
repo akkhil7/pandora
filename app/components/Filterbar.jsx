@@ -7,17 +7,26 @@ class Filterbar extends React.Component{
 		super()
 	}
 
+	handleFilter(e){
+		e.preventDefault();
+		var that = e.target
+		var type = e.target.getAttribute('value')
+		console.log(that)
+		e.target.setAttribute('checked',true)
+		this.props.filter(e,this,type)
+	}
+
 
 	render(){
 		return(
 			   <div className='filterbar'>
-			   	<div className="filter-section">
-			   		<h3>Category</h3>
-			        <input type="checkbox" id="katas" value="katas"/><label htmlFor="katas">Code Katas</label>
-			   		<input type="checkbox" id="webapps" value="webapps"/><label htmlFor="webapps">Web Apps</label>
-			   		<input type="checkbox" id="mobile" value="mobile"/><label htmlFor="mobile">Mobile Apps</label>
-			   	    <input type="checkbox" id="codesnippets" value="codesnippets"/><label htmlFor="codesnippets">Code Snippets</label>
-			   	</div>
+			   <h1>Category</h1>
+			   	<ul className="filter-section">
+			   		<li className="exercise">Code Exercise</li>
+			   		<li className="webapps">Web Apps</li>
+			   		<li className="mobile">Mobile Apps</li>
+			   	    <li className="codesnippets">Code Snippets</li>
+			   	</ul>
 			   </div>
 			)
 	}

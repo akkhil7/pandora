@@ -51,6 +51,14 @@ class SearchCode extends React.Component{
 	changeDiff(val) {
 		this.setState({ difficulty: val})
 	}
+
+	filterResult(e,that,type) {
+		//console.log("Ready to filter");
+		console.log(type)
+		//if(type=="exercise")
+			//console.log(exercise)
+
+	}
 	render(){
 
 		var options = [
@@ -104,7 +112,7 @@ class SearchCode extends React.Component{
 					className="search-button"> Search </button>
 
 				</div>
-				<Filterbar />
+				<Filterbar filter={this.filterResult.bind(this)} />
 				{display}
 			</div>
 
@@ -114,3 +122,6 @@ class SearchCode extends React.Component{
 }
 
 module.exports = SearchCode;
+
+
+

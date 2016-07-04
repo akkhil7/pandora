@@ -9,8 +9,9 @@ class CreateCode extends React.Component{
 	constructor(){
 		super()
 		this.state={
-			language:'Ruby',
-			difficulty:'Easy'
+			language:'ruby',
+			difficulty:'easy',
+		    category:'web'
 		}
 	}
 	handleSubmit(e){
@@ -20,6 +21,7 @@ class CreateCode extends React.Component{
 		var difficulty = this.state.difficulty
 		var app_link = this.refs.app_link.value
 		var github_link = this.refs.github_link.value
+		var category = this.state.category
 		var description = this.refs.description.value
 
 		var data={
@@ -28,6 +30,7 @@ class CreateCode extends React.Component{
 			difficulty: difficulty,
 			link: app_link,
 			github_link: github_link,
+			category: category,
 			description: description
 		}
 		console.log(data);
@@ -48,9 +51,14 @@ class CreateCode extends React.Component{
 	changeDiff(val) {
 		this.setState({ difficulty: val})
 	} 
+
+	changeCat(val){
+		this.setState({ category: val})
+	}
 	render(){
 		var language=this.state.language
 		var difficulty=this.state.difficulty
+        var category=this.state.category
 
 		var options = [
 		{ value: 'ruby', label: 'Ruby' },
@@ -61,6 +69,13 @@ class CreateCode extends React.Component{
 			{ value: 'easy', label: 'Easy'},
 			{ value: 'meduim', label: 'Medium'},
 			{ value: 'hard', label: 'Hard'}
+		]
+
+		var c_options =[
+            { value: 'exercise', label:'Code Exercise' },
+            { value: 'web',label:'Web App'},
+            { value: 'mobile',label:'Mob App'},
+            { value: 'snippet',label:'Code Snippet'}
 		]
 		  
 		return(
@@ -86,7 +101,16 @@ class CreateCode extends React.Component{
 					/>
 
 					<input ref="app_link" type="text" placeholder="App link" name="app link" />
-					<input ref="github_link" type="text" placeholder="Github link" name="github link" />
+					<input ref="github_link" type="text" placeholder="Github link" name="github link" />	
+
+					<Select
+					name='category-select'
+					className='select'
+					value={category}
+					onChange={this.changeCat.bind(this)}
+					options={c_options}
+					/>
+
 				    <textarea ref="description" id="txtArea" rows="8" placeholder="App description"></textarea>
 				    <input type="submit" value="Submit" className="submit-long" onClick={this.handleSubmit.bind(this)}/>
 				</div>
