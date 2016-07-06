@@ -9,6 +9,10 @@ class CodeResultBox extends React.Component{
 		super()
 	}
 
+	descdisplay(e){
+		var desc = this.state.description
+	}
+
 	render(){
 		var code = this.props.code
 		var language = code.language
