@@ -6,13 +6,14 @@ import Select from 'react-select';
 import _ from 'lodash';
 import CodeResultList from './CodeResultList.jsx';
 import API from './API.js';
+import $ from 'jquery';
 import Filterbar from './Filterbar.jsx';
 
 class SearchCode extends React.Component{
 	constructor(){
 		super()
 		this.state = {
-			isSearching:false
+			isSearching: false
 		}
 	}
 		
@@ -52,13 +53,71 @@ class SearchCode extends React.Component{
 		this.setState({ difficulty: val})
 	}
 
-	filterResult(e,that,type) {
-		//console.log("Ready to filter");
-		console.log(type)
-		//if(type=="exercise")
-			//console.log(exercise)
+	// filterResult(e,type) {
+	// 	console.log("Ready to filter" + type);
+	// 	var result = this.state.result
+	// 	var isWeb = this.state.isWeb
+	// 	var isMobile = this.state.isMobile
+	// 	var isSnippet = this.state.isSnippet
+	// 	var isExercise = this.state.isExercise
+	// 	var noMatchFlag=false
+	// 	this.toggleFilter(type);
 
-	}
+	// 	if($(e.target).hasClass("highlight"))
+	// 		$(".highlight").removeClass("highlight")
+	// 	else
+	// 		{	
+	// 		$(".highlight").removeClass("highlight")
+	// 		$(e.target).toggleClass("highlight")
+	// 	}
+
+
+	// 	if(isWeb||isMobile||isSnippet||isExercise)
+	// 		var newResult = _.filter(result, (o) => {
+	// 			return o.category==type
+	// 	})
+	// 	else //un toggle to get normal results
+	// 		var newResult = result
+
+	// 	if(_.isEmpty(newResult))
+	// 		var noMatchFlag = true
+
+
+	// 	console.log(newResult)
+	// 	console.log(result)
+	// 	this.setState({newResult: newResult,
+	// 		noMatchFlag: noMatchFlag})
+
+
+	// }
+
+	// toggleFilter(type) {
+	// 	var isWeb = this.state.isWeb
+	// 	var isMobile = this.state.isMobile
+	// 	var isSnippet = this.state.isSnippet
+	// 	var isExercise = this.state.isExercise
+	// 	if(type=="exercise")
+	// 		this.setState({isExercise: !isExercise,
+	// 			isWeb: false,
+	// 			isSnippet: false,
+	// 			isMobile: false})
+	// 	else if(type=="mobile")
+	// 		this.setState({isExercise: false,
+	// 			isWeb: false,
+	// 			isSnippet: false,
+	// 			isMobile: !isMobile})
+	// 	else if(type=="snippet")
+	// 		this.setState({isExercise: false,
+	// 			isWeb: false,
+	// 			isSnippet: !isSnippet,
+	// 			isMobile: false})
+	// 	else
+	// 		this.setState({isExercise: false,
+	// 			isWeb: !isWeb,
+	// 			isSnippet: false,
+	// 			isMobile: false})
+
+	// }
 	render(){
 
 		var options = [
@@ -74,9 +133,17 @@ class SearchCode extends React.Component{
         
 		var display_none = <h2> No Results </h2>
 		var language = this.state.language
-		var difficulty = this.state.difficulty
 
-		var display = !_.isEmpty(this.state.result) ? <CodeResultList codes={this.state.result} /> : display_none
+		var difficulty = this.state.difficulty
+		var flag = this.state.noMatchFlag
+
+		if(_.isEmpty(this.state.newResult))
+			if(flag)
+				var display = display_none
+			else
+				var display = !_.isEmpty(this.state.result) ? <CodeResultList codes={this.state.result} /> : display_none
+		else
+			var display = <CodeResultList codes={this.state.newResult} />
 
 		return(
 			<div className="search-code-container">
