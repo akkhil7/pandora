@@ -7,10 +7,12 @@ import UserDashBoard from './components/UserDashBoard.jsx';
 import SearchCode from './components/SearchCode.jsx';
 import CreateCode from './components/CreateCode.jsx';
 import CodeDesc from './components/CodeDesc.jsx' ;
+import HomePage from './components/HomePage.jsx'
 
 
 var routes = (
   <Route name="app" path="/" handler={ App }>
+    <DefaultRoute handler={HomePage} />
   	<Route name="register" path="/register" handler={ UserRegister } />
   	<Route name="login" path="login" handler={ UserLogin } />
   	<Route name="dashboard" path="dashboard" handler={ UserDashBoard } />

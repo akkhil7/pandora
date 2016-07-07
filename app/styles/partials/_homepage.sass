@@ -1,0 +1,81 @@
+#homepage-wrapper
+  +span-columns(12 of 12)
+  height: 100%
+  background: #D38312 /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #D38312 , #A83279) /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #fa9b2a , #A83279) /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+.container
+  margin-top: -200px
+  padding: 20px
+  height: 100%
+  +outer-container()
+
+  h2
+
+    +span-columns(2.5)
+    font-size: 1.7em
+    font-weight: 100
+    color: white
+
+  .submit
+    +span-columns(2.5)
+    +shift(6.5)
+    height: 35px
+    background-color: #67e664
+    font-size: 0.9em
+    box-shadow: 0 1px 3px 0px rgba(0,0,0,0.5)
+
+  h3
+    clear: both
+    padding-top: 100px
+    +span-columns(7)
+    +shift(2.5)
+    text-align: center
+    font-size: 2em
+    font-weight: 200
+    color: white
+
+  em
+    color: #fdc158
+
+  input
+    background-color: rgba(0,0,0,0.3)
+    +span-columns(6)
+    +shift(2)
+    border-top-right-radius: 0px
+    border-bottom-right-radius: 0px
+    +omega()
+    border: none
+    color: white
+    margin-top: 20px
+    font-weight: 200
+    height: 50px
+    padding-left: 20px
+
+    &:focus
+      border: none
+    &:active
+      border: none
+  input::-webkit-input-placeholder 
+    color:    white
+  
+  input:-moz-placeholder
+    color:    #white
+    opacity:  1
+  
+  input::-moz-placeholder 
+    color:    #white
+    opacity:  1
+  
+  input:-ms-input-placeholder
+    color:    #white
+    
+  .search
+    +span-columns(2)
+    height: 50px
+    margin-top: 20px
+    border-top-left-radius: 0px
+    border-bottom-left-radius: 0px
+    background-color: #d43e6c
+    +omega()

@@ -7,6 +7,7 @@
 @import "partials/coderesult.sass";
 @import "partials/createcode.sass";
 @import "partials/filterbar.sass";
+@import "partials/homepage.sass";
 
 input:focus {
   outline: none;
@@ -67,7 +68,7 @@ html {
   width: 100%;
 }
 
-.register{ 
+.register{
 	@include span-columns(5.5);
 	@include shift(3.25);
 	background-color: rgba(255,255,255,0.6);
@@ -77,7 +78,7 @@ html {
   margin-top: 13%;
   z-index: 9999;
   box-shadow:1px 1px 1px 1px grey;
-  filter: alpha(opacity=60); 
+  filter: alpha(opacity=60);
 }
 
 .register-bg{
@@ -101,7 +102,7 @@ html {
   margin-top: 18%;
   z-index: 9999;
   box-shadow:1px 1px 1px 1px grey;
-  filter: alpha(opacity=60); 
+  filter: alpha(opacity=60);
 }
 
 .login-bg{
