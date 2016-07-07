@@ -6,185 +6,275 @@ import Select from 'react-select';
 import _ from 'lodash';
 import CodeResultList from './CodeResultList.jsx';
 import API from './API.js';
-import $ from 'jquery';
+//import $ from 'jquery';
 import Filterbar from './Filterbar.jsx';
 
 class SearchCode extends React.Component{
-	constructor(){
-		super()
-		this.state = {
-			isSearching: false
-		}
-	}
-		
-	handleSubmit(e) {
-		e.preventDefault();
-		this.setState({isSearching:true})
+  constructor(){
+    super()
+    this.state = {
+      isSearching: false,
+      newResult: [],
+      isWeb: false,
+      isMobile: false,
+      isSnippet: false,
+      isExercise: false,
+      noMatchFlag: false
+    }
+  }
 
-		var difficulty = this.state.difficulty
-		var language = this.state.language
-		var keyword = this.refs.keyword.value
+  handleSubmit(e) {
+    e.preventDefault();
+    this.setState({isSearching:true})
 
-		var _data  = {
+    var difficulty = this.state.difficulty
+    var language = this.state.language
+    var keyword = this.refs.keyword.value
 
-			difficulty: difficulty,
-			language: language,
-			keyword: keyword
-		
-		}
+    var _data  = {
 
-		var _this = this
-		var url = API.url('codes/search')
-		var success = function(res) {
-			console.log(res)
-			_this.setState({result : res})
-		}
-		var failure = function(res) {
-			console.log(res) 
-		}
-		API.post(url,_data,success,failure);
+      difficulty: difficulty,
+      language: language,
+      keyword: keyword
 
-	}
-	changeLang(val) {
-		this.setState({ language: val})
-		console.log(val)
-	}
-	changeDiff(val) {
-		this.setState({ difficulty: val})
-	}
+    }
 
-	// filterResult(e,type) {
-	// 	console.log("Ready to filter" + type);
-	// 	var result = this.state.result
-	// 	var isWeb = this.state.isWeb
-	// 	var isMobile = this.state.isMobile
-	// 	var isSnippet = this.state.isSnippet
-	// 	var isExercise = this.state.isExercise
-	// 	var noMatchFlag=false
-	// 	this.toggleFilter(type);
+    var _this = this
+    var url = API.url('codes/search')
+    var success = function(res) {
+      console.log(res)
+      _this.setState({result : res})
+    }
+    var failure = function(res) {
+      console.log(res) 
+    }
+    API.post(url,_data,success,failure);
 
-	// 	if($(e.target).hasClass("highlight"))
-	// 		$(".highlight").removeClass("highlight")
-	// 	else
-	// 		{	
-	// 		$(".highlight").removeClass("highlight")
-	// 		$(e.target).toggleClass("highlight")
-	// 	}
+  }
+  changeLang(val) {
+    this.setState({ language: val})
+    console.log(val)
+  }
+  changeDiff(val) {
+    this.setState({ difficulty: val})
+  }
+
+  filterWeb(e) {
+    var node = e.target
+    var result = this.state.result
+    var isWeb = this.state.isWeb
+
+    if(!isWeb)
+      var newResult = _.filter(result, (o) => {
+        return o.category=="web"
+      })
+      else
+        var newResult = this.state.result
+
+      console.log(result)
+      console.log(newResult)
+      if(_.isEmpty(newResult))
+        {
+          this.setState({noMatchFlag: true,
+                        isWeb: !isWeb,
+                        isMobile: false,
+                        isSnippet: false,
+                        isExercise: false,
+                        newResult: newResult})
+        }
+        else
+          this.setState({isWeb: !isWeb,
+                        isMobile: false,
+                        isSnippet: false,
+                        isExercise: false,
+                        noMatchFlag: false,
+                        newResult: newResult
+          })                 
+
+  }
+
+  filterMobile(e) {
+    var result = this.state.result
+    var isMobile = this.state.isMobile
+
+    if(!isMobile)
+      var newResult = _.filter(result, (o) => {
+        return o.category=="mobile"
+      })
+      else
+        var newResult = this.state.result
+
+      console.log(result)
+      console.log(newResult)
+      if(_.isEmpty(newResult))
+        {
+          this.setState({noMatchFlag: true,
+                        isMobile: !isMobile,
+                        isWeb: false,
+                        isSnippet: false,
+                        isExercise: false,
+
+                        newResult: newResult})
+        }
+        else
+          this.setState({isMobile: !isMobile,
+                        noMatchFlag: false,
+                        isWeb: false,
+                        isSnippet: false,
+                        isExercise: false,
+
+                        newResult: newResult
+          })                 
+
+  }
+
+  filterExercise(e) {
+    var result = this.state.result
+    var isExercise = this.state.isExercise
+
+    if(!isExercise)
+      var newResult = _.filter(result, (o) => {
+        return o.category=="exercise"
+      })
+      else
+        var newResult = this.state.result
+
+      console.log(result)
+      console.log(newResult)
+      if(_.isEmpty(newResult))
+        {
+          this.setState({noMatchFlag: true,
+                        isExercise: !isExercise,
+                        isMobile: false,
+                        isSnippet: false,
+                        isWeb: false,
+
+                        newResult: newResult})
+        }
+        else
+          this.setState({isExercise: !isExercise,
+                        isMobile: false,
+                        isSnippet: false,
+                        isWeb: false,
+                        noMatchFlag: false,
+                        newResult: newResult
+          })                 
+
+  }
+
+  filterSnippet(e) {
+    var result = this.state.result
+    var isSnippet = this.state.isSnippet
+
+    if(!isSnippet)
+      var newResult = _.filter(result, (o) => {
+        return o.category=="snippet"
+      })
+      else
+        var newResult = this.state.result
+
+      console.log(result)
+      console.log(newResult)
+      if(_.isEmpty(newResult))
+        {
+          this.setState({noMatchFlag: true,
+                        isSnippet: !isSnippet,
+                        isMobile: false,
+                        isWeb: false,
+                        isExercise: false,
+
+                        newResult: newResult})
+        }
+        else  
+          this.setState({isSnippet: !isSnippet,
+                        isMobile: false,
+                        isWeb: false,
+                        isExercise: false,
+
+                        noMatchFlag: false,
+                        newResult: newResult
+          })                 
+
+  }
 
 
-	// 	if(isWeb||isMobile||isSnippet||isExercise)
-	// 		var newResult = _.filter(result, (o) => {
-	// 			return o.category==type
-	// 	})
-	// 	else //un toggle to get normal results
-	// 		var newResult = result
+  render(){
 
-	// 	if(_.isEmpty(newResult))
-	// 		var noMatchFlag = true
+    var options = [
+      { value: 'ruby', label: 'Ruby' },
+      { value: 'python', label: 'Python' }
+    ];
 
+    var d_options=[
+      { value: 'easy', label: 'Easy'},
+      { value: 'medium', label: 'Medium'},
+      { value: 'hard', label: 'Hard'}
+    ];
 
-	// 	console.log(newResult)
-	// 	console.log(result)
-	// 	this.setState({newResult: newResult,
-	// 		noMatchFlag: noMatchFlag})
+    var display_none = <h2> No Results </h2>
+    var language = this.state.language
 
+    var difficulty = this.state.difficulty
+    var flag = this.state.noMatchFlag
+    var isWeb = this.state.isWeb
+    var isMobile = this.state.isMobile
+    var isSnippet = this.state.isSnippet
+    var isExercise = this.state.isExercise
 
-	// }
+    if(flag)
+      var display = display_none
+    else if(isWeb || isMobile || isSnippet || isExercise)
+      var display = <CodeResultList codes={this.state.newResult} />
+    else if(!_.isEmpty(this.state.result))
+      var display = <CodeResultList codes={this.state.result} />
+    else
+      var display = display_none
 
-	// toggleFilter(type) {
-	// 	var isWeb = this.state.isWeb
-	// 	var isMobile = this.state.isMobile
-	// 	var isSnippet = this.state.isSnippet
-	// 	var isExercise = this.state.isExercise
-	// 	if(type=="exercise")
-	// 		this.setState({isExercise: !isExercise,
-	// 			isWeb: false,
-	// 			isSnippet: false,
-	// 			isMobile: false})
-	// 	else if(type=="mobile")
-	// 		this.setState({isExercise: false,
-	// 			isWeb: false,
-	// 			isSnippet: false,
-	// 			isMobile: !isMobile})
-	// 	else if(type=="snippet")
-	// 		this.setState({isExercise: false,
-	// 			isWeb: false,
-	// 			isSnippet: !isSnippet,
-	// 			isMobile: false})
-	// 	else
-	// 		this.setState({isExercise: false,
-	// 			isWeb: !isWeb,
-	// 			isSnippet: false,
-	// 			isMobile: false})
-
-	// }
-	render(){
-
-		var options = [
-		{ value: 'ruby', label: 'Ruby' },
-		{ value: 'python', label: 'Python' }
-		];
-
-		var d_options=[
-		{ value: 'easy', label: 'Easy'},
-		{ value: 'medium', label: 'Medium'},
-		{ value: 'hard', label: 'Hard'}
-		];
-        
-		var display_none = <h2> No Results </h2>
-		var language = this.state.language
-
-		var difficulty = this.state.difficulty
-		var flag = this.state.noMatchFlag
-
-		if(_.isEmpty(this.state.newResult))
-			if(flag)
-				var display = display_none
-			else
-				var display = !_.isEmpty(this.state.result) ? <CodeResultList codes={this.state.result} /> : display_none
-		else
-			var display = <CodeResultList codes={this.state.newResult} />
-
-		return(
-			<div className="search-code-container">
-				<UserNavbar />
-				<div className="search-wrapper">
-				      <h2>Keyword</h2>
-					  <h2>Language</h2>
-					  <h2>Difficulty</h2>
-					<input ref="keyword" type="text" placeholder="Enter keyword" />
+    return(
+      <div className="search-code-container">
+        <UserNavbar />
+        <div className="search-wrapper">
+          <h2>Keyword</h2>
+          <h2>Language</h2>
+          <h2>Difficulty</h2>
+          <input ref="keyword" type="text" placeholder="Enter keyword" />
 
 
-					<Select
-					name="language-selectname"
-					className='select'
-					value={language}
-					onChange={this.changeLang.bind(this)}
-					searchable={false}
-					options={options}
-					/>
+          <Select
+            name="language-selectname"
+            className='select'
+            value={language}
+            onChange={this.changeLang.bind(this)}
+            searchable={false}
+            options={options}
+          />
 
-					<Select
-					name="difficulty-select"
-					className='select'
-					onChange={this.changeDiff.bind(this)}
-					searchable={false}
-					value={difficulty}
-					options={d_options}
-					/>
+        <Select
+          name="difficulty-select"
+          className='select'
+          onChange={this.changeDiff.bind(this)}
+          searchable={false}
+          value={difficulty}
+          options={d_options}
+        />
 
 
 
-					<button onClick={this.handleSubmit.bind(this)} 
-					className="search-button"> Search </button>
+      <button onClick={this.handleSubmit.bind(this)} 
+        className="search-button"> Search </button>
 
-				</div>
-				<Filterbar filter={this.filterResult.bind(this)} />
-				{display}
-			</div>
+    </div>
+    <Filterbar
+      web={this.filterWeb.bind(this)}
+      snippet={this.filterSnippet.bind(this)}
+      exercise={this.filterExercise.bind(this)}
+      mobile={this.filterMobile.bind(this)}          
+    />
+    {display}
+  </div>
 
-			)
-	}
+    )
+  }
 
 }
 
