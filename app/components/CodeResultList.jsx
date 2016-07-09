@@ -8,6 +8,13 @@ class CodeResultList extends React.Component{
 		super()
 	}
 
+  handleInfinite(e) {
+    console.log()
+    if (window.scrollTop == document.innerHeight - window.innerHeight)
+        {
+          console.log("Bottom reached")
+        }
+  }
 	render(){
 		var codes = this.props.codes
 		console.log(codes)
@@ -15,7 +22,7 @@ class CodeResultList extends React.Component{
 			return <CodeResultBox code={code} />
 		})
 		return(
-			<div className="code-result-list">
+			<div onScroll={this.handleInfinite.bind(this)} className="code-result-list">
                { display }
 			</div>
 			)

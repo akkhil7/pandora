@@ -1,27 +1,21 @@
-.filterbar
-	+span-columns(2 of 12)
-	background-color: #efefef
-	height: 100%
-
-	h3
-		text-align: center
-		font-weight: 200
-		font-size: 1.5em
-
+.filter-bar
+  +span-columns(12)
+  height: 70px
 
 .filter-section	
-	padding-top: 40px
-	+span-columns(11)
-	+shift(0.5)
-	float: left
-	height: auto
+  +span-columns(12)
+  padding-top: 10px
+  height: auto
 
-	li
-		+span-columns(8)
-		+shift(2)
+  li
+    +span-columns(3)
+    text-align: center
+    font-size: 0.9em
 
+  span:hover
+    padding: 5px 20px
+    //background-color: #db4860
+    border-radius: 25px
+    //transform: scale(1.1)
+    //transition: all 200ms ease-in-out
 
-	.highlight
-		color: red
-		transform: scale(1.1)
-		transition: all 0.2s ease-in-out

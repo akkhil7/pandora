@@ -27,14 +27,11 @@ class SearchCode extends React.Component{
     e.preventDefault();
     this.setState({isSearching:true})
 
-    var difficulty = this.state.difficulty
-    var language = this.state.language
-    var keyword = this.refs.keyword.value
+    var keyword = this.refs.keyword.trim().value
 
+    this.context.router.transitionTo('searchcode', {search: keyword})
     var _data  = {
 
-      difficulty: difficulty,
-      language: language,
       keyword: keyword
 
     }
@@ -54,9 +51,6 @@ class SearchCode extends React.Component{
   changeLang(val) {
     this.setState({ language: val})
     console.log(val)
-  }
-  changeDiff(val) {
-    this.setState({ difficulty: val})
   }
 
   filterWeb(e) {
@@ -202,19 +196,14 @@ class SearchCode extends React.Component{
 
     var options = [
       { value: 'ruby', label: 'Ruby' },
-      { value: 'python', label: 'Python' }
+      { value: 'python', label: 'Python' },
+      { value: 'javascript', label: 'Javascript' },
+      { value: 'java', label: 'Java' }
     ];
 
-    var d_options=[
-      { value: 'easy', label: 'Easy'},
-      { value: 'medium', label: 'Medium'},
-      { value: 'hard', label: 'Hard'}
-    ];
-
-    var display_none = <h2> No Results </h2>
+    var display_none = <h2 className="no-result"> No Results </h2>
     var language = this.state.language
 
-    var difficulty = this.state.difficulty
     var flag = this.state.noMatchFlag
     var isWeb = this.state.isWeb
     var isMobile = this.state.isMobile
@@ -228,50 +217,26 @@ class SearchCode extends React.Component{
     else if(!_.isEmpty(this.state.result))
       var display = <CodeResultList codes={this.state.result} />
     else
-      var display = display_none
+      var display = ""
 
     return(
       <div className="search-code-container">
-        <UserNavbar />
+        <h1 className="logo">&lt;CodeDammit /&gt; </h1>
         <div className="search-wrapper">
-          <h2>Keyword</h2>
-          <h2>Language</h2>
-          <h2>Difficulty</h2>
           <input ref="keyword" type="text" placeholder="Enter keyword" />
 
+          <button onClick={this.handleSubmit.bind(this)} 
+            className="search-button"> Search </button>
 
-          <Select
-            name="language-selectname"
-            className='select'
-            value={language}
-            onChange={this.changeLang.bind(this)}
-            searchable={false}
-            options={options}
+        </div>
+          <Filterbar
+            web={this.filterWeb.bind(this)}
+            snippet={this.filterSnippet.bind(this)}
+            exercise={this.filterExercise.bind(this)}
+            mobile={this.filterMobile.bind(this)}          
           />
-
-        <Select
-          name="difficulty-select"
-          className='select'
-          onChange={this.changeDiff.bind(this)}
-          searchable={false}
-          value={difficulty}
-          options={d_options}
-        />
-
-
-
-      <button onClick={this.handleSubmit.bind(this)} 
-        className="search-button"> Search </button>
-
-    </div>
-    <Filterbar
-      web={this.filterWeb.bind(this)}
-      snippet={this.filterSnippet.bind(this)}
-      exercise={this.filterExercise.bind(this)}
-      mobile={this.filterMobile.bind(this)}          
-    />
-    {display}
-  </div>
+          {display}
+        </div>
 
     )
   }

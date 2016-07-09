@@ -10,12 +10,7 @@ class UserNavbar extends React.Component{
 		return(
 			<div className='Navbar'>
 				<ul className='Navbar-contents'>
-					<li className="logo"><h2>Space</h2><h6> Back</h6></li>
-					<li>one</li>
-					<li>two</li>
-					<li>three</li>
-					<li>four</li>
-					<li>five</li>
+          <h2 className="logo">&lt;CodeDammit/&gt;</h2>
 				</ul>
 			</div>
 			)

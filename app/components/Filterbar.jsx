@@ -1,18 +1,19 @@
 import React from 'react';
 import Router from 'react-router';
 import Select from 'react-select';
+import dynamics from 'dynamics.js'
 
 class Filterbar extends React.Component{
-	constructor(){
-		super()
+  constructor(){
+    super()
 
-	}
+  }
 
-	filterExercise(e){
-		e.preventDefault();
-		this.props.exercise(e);
-	}
-  
+  filterExercise(e){
+    e.preventDefault();
+    this.props.exercise(e);
+  }
+
   filterWeb(e) {
     e.preventDefault();
     this.props.web(e);
@@ -27,20 +28,19 @@ class Filterbar extends React.Component{
     e.preventDefault();
     this.props.snippet(e)
   }
-   
-	render(){
-		return(
-			   <div className='filterbar'>
-			   <h1>Category</h1>
-			   	<ul className="filter-section">
-			   		<li data-filter-type="exercise" onClick={this.filterExercise.bind(this)} >Code Exercise</li>
-			   		<li data-filter-type="web" onClick={this.filterWeb.bind(this)} >Web Apps</li>
-			   		<li data-filter-type="mobile" onClick={this.filterMobile.bind(this)} >Mobile Apps</li>
-			   	    <li data-filter-type="snippet" onClick={this.filterSnippet.bind(this)} >Code Snippets</li>
-			   	</ul>
-			   </div>
-			)
-	}
+
+  render(){
+    return(
+      <div className='filter-bar'>
+        <ul className="filter-section">
+          <li data-filter-type="exercise" onClick={this.filterExercise.bind(this)}><span>CODE EXERCISES</span></li>
+          <li data-filter-type="web" onClick={this.filterWeb.bind(this)}><span>WEB APPS</span></li>
+          <li data-filter-type="mobile" onClick={this.filterMobile.bind(this)}><span>MOBILE APPS</span></li>
+          <li data-filter-type="snippet" onClick={this.filterSnippet.bind(this)}><span>CODE SNIPPETS</span></li>
+        </ul>
+      </div>
+    )
+  }
 }
 
 

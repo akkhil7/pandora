@@ -1,26 +1,35 @@
+
 .search-code-container
-	height: 100%
+  +outer-container
+  height: 100%
+  padding-top: 20px
 
-	.search-wrapper
-		+span-columns(12 of 12)
-		padding: 10px
-		background-color: #f4f4f4
-	
-		h1
-			font-size: 2.5em
-
-		h2
-			+span-columns(3)
-
-		input
-	   		+span-columns(3)
+  h1
+    +span-columns(4)
+    font-weight: 200
+    font-size: 2em
+    
+.search-wrapper
+  +span-columns(6)
+  +shift(2)
+  +omega()
+  padding-bottom: 20px
+  margin-bottom: 20px
 
 
-		.search-button
-			+span-columns(3)
-			background-color: #0295d9
-			height: 36px
-			font-size: 0.9em
+  h1
+    font-size: 2.5em
 
-		.select
-			+span-columns(3)
+  input
+    +span-columns(10)
+
+
+.search-button
+  +span-columns(2)
+  background-color: #0295d9
+  height: 36px
+  font-size: 0.8em
+
+.select
+  +span-columns(3)
+
