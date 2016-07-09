@@ -18,8 +18,8 @@ var routes = (
   	<Route name="dashboard" path="dashboard" handler={ UserDashBoard } />
   	<Route name="searchcode" path="search" handler={ SearchCode } />
   	<Route name="createcode" path="create" handler={ CreateCode } />
-  	<Route name="codedesc" path="codes/:id" handler={ CodeDesc } />
+  	<Route name="codedesc" path="code/:id" handler={ CodeDesc } />
   </Route>
 );
 
-export default routes;
+export default routes; 

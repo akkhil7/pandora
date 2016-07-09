@@ -1,33 +1,43 @@
-
+  
 .search-code-container
-  +outer-container
+  +span-columns(12)
   height: 100%
   padding-top: 20px
 
-  h1
+  .header-wrapper
+    +span-columns(12)
+    border-bottom: 1px solid #db4860
+    margin-bottom: 10px
+  
+  .header
+    +outer-container
+
+  .logo
     +span-columns(4)
-    font-weight: 200
-    font-size: 2em
-    
-.search-wrapper
-  +span-columns(6)
-  +shift(2)
+    margin-top: 8px
+    margin-bottom: 20px
+
+.search-result-wrapper
+  +outer-container
+
+.search-options
+  +span-columns(3)
   +omega()
-  padding-bottom: 20px
-  margin-bottom: 20px
-
-
+  
   h1
     font-size: 2.5em
 
   input
-    +span-columns(10)
+    +span-columns(9)
+    +omega()
+    height: 30px
 
 
 .search-button
   +span-columns(2)
-  background-color: #0295d9
-  height: 36px
+  +omega()
+  background-color: #db4860
+  height: 30px
   font-size: 0.8em
 
 .select

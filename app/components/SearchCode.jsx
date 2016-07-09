@@ -15,24 +15,26 @@ class SearchCode extends React.Component{
     this.state = {
       isSearching: false,
       newResult: [],
-      isWeb: false,
-      isMobile: false,
-      isSnippet: false,
-      isExercise: false,
-      noMatchFlag: false
+      searchable: false,
+      noMatchFlag: false,
+      keyword: "",
+      category: "",
+      difficulty: "",
+      language: ""
     }
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    this.setState({isSearching:true})
 
-    var keyword = this.refs.keyword.trim().value
+    var keyword = this.refs.keyword.value.trim()
+    var category = this.state.category
+    this.setState({isSearching:true, keyword: keyword})
 
-    this.context.router.transitionTo('searchcode', {search: keyword})
     var _data  = {
 
-      keyword: keyword
+      keyword: keyword,
+      category: category
 
     }
 
@@ -40,158 +42,37 @@ class SearchCode extends React.Component{
     var url = API.url('codes/search')
     var success = function(res) {
       console.log(res)
-      _this.setState({result : res})
+      _this.setState({result : res, keyword: keyword})
     }
     var failure = function(res) {
-      console.log(res) 
+      console.log(res)
+      _this.setState({isError: true})
+      
     }
     API.post(url,_data,success,failure);
 
   }
-  changeLang(val) {
-    this.setState({ language: val})
-    console.log(val)
+
+  handleCategoryFilter(e,category) {
+    console.log(category)
+    var url = API.url('codes/search')
+    var data = {
+      category: category
+    }
+    var _this = this
+    var success = function(res) {
+      console.log(res)
+      _this.setState({result: res, category: category,
+      searchable: true})
+    }
+    var failure = function(res) {
+      console.log(res)
+      _this.setState({category: category,
+                      isError: true})
+    }
+
+    API.post(url,data,success,failure);
   }
-
-  filterWeb(e) {
-    var node = e.target
-    var result = this.state.result
-    var isWeb = this.state.isWeb
-
-    if(!isWeb)
-      var newResult = _.filter(result, (o) => {
-        return o.category=="web"
-      })
-      else
-        var newResult = this.state.result
-
-      console.log(result)
-      console.log(newResult)
-      if(_.isEmpty(newResult))
-        {
-          this.setState({noMatchFlag: true,
-                        isWeb: !isWeb,
-                        isMobile: false,
-                        isSnippet: false,
-                        isExercise: false,
-                        newResult: newResult})
-        }
-        else
-          this.setState({isWeb: !isWeb,
-                        isMobile: false,
-                        isSnippet: false,
-                        isExercise: false,
-                        noMatchFlag: false,
-                        newResult: newResult
-          })                 
-
-  }
-
-  filterMobile(e) {
-    var result = this.state.result
-    var isMobile = this.state.isMobile
-
-    if(!isMobile)
-      var newResult = _.filter(result, (o) => {
-        return o.category=="mobile"
-      })
-      else
-        var newResult = this.state.result
-
-      console.log(result)
-      console.log(newResult)
-      if(_.isEmpty(newResult))
-        {
-          this.setState({noMatchFlag: true,
-                        isMobile: !isMobile,
-                        isWeb: false,
-                        isSnippet: false,
-                        isExercise: false,
-
-                        newResult: newResult})
-        }
-        else
-          this.setState({isMobile: !isMobile,
-                        noMatchFlag: false,
-                        isWeb: false,
-                        isSnippet: false,
-                        isExercise: false,
-
-                        newResult: newResult
-          })                 
-
-  }
-
-  filterExercise(e) {
-    var result = this.state.result
-    var isExercise = this.state.isExercise
-
-    if(!isExercise)
-      var newResult = _.filter(result, (o) => {
-        return o.category=="exercise"
-      })
-      else
-        var newResult = this.state.result
-
-      console.log(result)
-      console.log(newResult)
-      if(_.isEmpty(newResult))
-        {
-          this.setState({noMatchFlag: true,
-                        isExercise: !isExercise,
-                        isMobile: false,
-                        isSnippet: false,
-                        isWeb: false,
-
-                        newResult: newResult})
-        }
-        else
-          this.setState({isExercise: !isExercise,
-                        isMobile: false,
-                        isSnippet: false,
-                        isWeb: false,
-                        noMatchFlag: false,
-                        newResult: newResult
-          })                 
-
-  }
-
-  filterSnippet(e) {
-    var result = this.state.result
-    var isSnippet = this.state.isSnippet
-
-    if(!isSnippet)
-      var newResult = _.filter(result, (o) => {
-        return o.category=="snippet"
-      })
-      else
-        var newResult = this.state.result
-
-      console.log(result)
-      console.log(newResult)
-      if(_.isEmpty(newResult))
-        {
-          this.setState({noMatchFlag: true,
-                        isSnippet: !isSnippet,
-                        isMobile: false,
-                        isWeb: false,
-                        isExercise: false,
-
-                        newResult: newResult})
-        }
-        else  
-          this.setState({isSnippet: !isSnippet,
-                        isMobile: false,
-                        isWeb: false,
-                        isExercise: false,
-
-                        noMatchFlag: false,
-                        newResult: newResult
-          })                 
-
-  }
-
-
   render(){
 
     var options = [
@@ -205,38 +86,40 @@ class SearchCode extends React.Component{
     var language = this.state.language
 
     var flag = this.state.noMatchFlag
-    var isWeb = this.state.isWeb
-    var isMobile = this.state.isMobile
-    var isSnippet = this.state.isSnippet
-    var isExercise = this.state.isExercise
+    var searchable = this.state.searchable
 
     if(flag)
       var display = display_none
-    else if(isWeb || isMobile || isSnippet || isExercise)
+    else if(true)
       var display = <CodeResultList codes={this.state.newResult} />
     else if(!_.isEmpty(this.state.result))
       var display = <CodeResultList codes={this.state.result} />
     else
       var display = ""
 
+    if(searchable)
+      var displaySearchBar = (            <div className="search-options">
+              <input ref="keyword" type="text" placeholder="Enter keyword" />
+              <button onClick={this.handleSubmit.bind(this)} 
+                className="search-button"> Search </button>
+            </div>
+)
     return(
       <div className="search-code-container">
-        <h1 className="logo">&lt;CodeDammit /&gt; </h1>
-        <div className="search-wrapper">
-          <input ref="keyword" type="text" placeholder="Enter keyword" />
-
-          <button onClick={this.handleSubmit.bind(this)} 
-            className="search-button"> Search </button>
-
+        <div className="header-wrapper">
+          <div className="header">
+            <div className="logo">
+              <img src="img/logo.png" />
+            </div>
+          </div>
         </div>
-          <Filterbar
-            web={this.filterWeb.bind(this)}
-            snippet={this.filterSnippet.bind(this)}
-            exercise={this.filterExercise.bind(this)}
-            mobile={this.filterMobile.bind(this)}          
-          />
+        <div className="search-result-wrapper">
+          <Filterbar categoryFilter={this.handleCategoryFilter.bind(this)}       
+          />          {displaySearchBar}
+
           {display}
         </div>
+      </div>
 
     )
   }

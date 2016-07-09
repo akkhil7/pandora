@@ -9,34 +9,19 @@ class Filterbar extends React.Component{
 
   }
 
-  filterExercise(e){
+  filterCategory(e){
     e.preventDefault();
-    this.props.exercise(e);
-  }
-
-  filterWeb(e) {
-    e.preventDefault();
-    this.props.web(e);
-  }
-
-  filterMobile(e) {
-    e.preventDefault();
-    this.props.mobile(e)
-  }
-
-  filterSnippet(e) {
-    e.preventDefault();
-    this.props.snippet(e)
+    var category = e.target.getAttribute('data-filter-type')
+    this.props.categoryFilter(e,category)
   }
 
   render(){
     return(
       <div className='filter-bar'>
         <ul className="filter-section">
-          <li data-filter-type="exercise" onClick={this.filterExercise.bind(this)}><span>CODE EXERCISES</span></li>
-          <li data-filter-type="web" onClick={this.filterWeb.bind(this)}><span>WEB APPS</span></li>
-          <li data-filter-type="mobile" onClick={this.filterMobile.bind(this)}><span>MOBILE APPS</span></li>
-          <li data-filter-type="snippet" onClick={this.filterSnippet.bind(this)}><span>CODE SNIPPETS</span></li>
+          <li data-filter-type="web" onClick={this.filterCategory.bind(this)}><span data-filter-type="web">WEB</span></li>
+          <li data-filter-type="mobile" onClick={this.filterCategory.bind(this)}><span data-filter-type="mobile">MOBILE</span></li>
+          <li data-filter-type="snippet" onClick={this.filterCategory.bind(this)}><span data-filter-type="snippet">SNIPPETS</span></li>
         </ul>
       </div>
     )
