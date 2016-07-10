@@ -117,7 +117,12 @@ class SearchCode extends React.Component{
           </div>
         </div>
         <div className="search-result-wrapper">
+<<<<<<< HEAD
           < MobileSidebar />
+=======
+          <div className="filter-option-container">
+          </div>
+>>>>>>> 204f364082ea834e151a2c2736354de6e60d9667
           <div className="filter-bar-wrapper">
             <Filterbar categoryFilter={this.handleCategoryFilter.bind(this)}       
             />   
