@@ -2,15 +2,16 @@
 .search-code-container
   +span-columns(12)
   height: 100%
-  padding-top: 20px
 
   .header-wrapper
     +span-columns(12)
-    border-bottom: 1px solid #db4860
-    margin-bottom: 10px
+    padding-left: 10px
+    padding-top: 20px
+    background-color: #212121
+   
   
   .header
-    +outer-container
+    +outer-container(65%)
 
   .logo
     +span-columns(4)
@@ -18,11 +19,14 @@
     margin-bottom: 20px
 
 .search-result-wrapper
-  +outer-container
+  +span-columns(12)
+  height: calc(100% - 65px)
+  position: relative
 
 .search-options
   +span-columns(3)
   +omega()
+  padding-top: 10px
   
   h1
     font-size: 2.5em
@@ -42,4 +46,16 @@
 
 .select
   +span-columns(3)
+
+
+
+
+.filter-option-container
+  position: absolute
+  left: 0
+  top: 0
+  width: 17.5%
+  height: 100%
+  background-color: #ee4d68
+  box-shadow: 1px 0px 1px rgba(0,0,0,0.3)
 
