@@ -8,6 +8,9 @@ import CodeResultList from './CodeResultList.jsx';
 import API from './API.js';
 //import $ from 'jquery';
 import Filterbar from './Filterbar.jsx';
+import WebSidebar from './WebSidebar.jsx';
+import MobileSidebar from './MobileSidebar.jsx';
+import SnippetSidebar from './SnippetSidebar.jsx';
 
 class SearchCode extends React.Component{
   constructor(){
@@ -109,14 +112,17 @@ class SearchCode extends React.Component{
         <div className="header-wrapper">
           <div className="header">
             <div className="logo">
-              <img src="img/logo.png" />
+              <img src="img/logo4.png" />
             </div>
           </div>
         </div>
         <div className="search-result-wrapper">
-          <Filterbar categoryFilter={this.handleCategoryFilter.bind(this)}       
-          />          {displaySearchBar}
-
+          < MobileSidebar />
+          <div className="filter-bar-wrapper">
+            <Filterbar categoryFilter={this.handleCategoryFilter.bind(this)}       
+            />   
+            {displaySearchBar}
+          </div>
           {display}
         </div>
       </div>
