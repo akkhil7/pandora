@@ -11,12 +11,12 @@ class SnippetSidebar extends React.Component{
 
   render(){
     return(
-     <div className='filter-option-container'> 
-        <ul className='sidebar-language'>
-          <h1>Code Snippet</h1>
-          <h3>Language</h3>
+      <div className='filter-option-container'> 
+        <h3>Language</h3>
+
+        <ul className='sidebar-options'>
           <li data-language = 'python' >Python</li>
-          <li data-language = 'ruby' >RUby</li>
+          <li data-language = 'ruby' >Ruby</li>
           <li data-language = 'java'>Java</li>
           <li data-language = 'javascript'>Javascript</li>
           <li data-language = 'c' >C</li>
@@ -26,13 +26,14 @@ class SnippetSidebar extends React.Component{
           <li data-language = 'haskell'>Haskell</li>
           <li data-language = 'html'>HTML and CSS</li>
         </ul>
-        <ul className='sidebar-difficulty'>
-          <h3>difficulty</h3>
+        <h3>Difficulty</h3>
+
+        <ul className='sidebar-options'>
           <li data-difficulty = 'easy' >Easy</li>
           <li data-difficulty = 'medium' >Medium</li>
           <li data-difficulty = 'hard' >Hard</li>
         </ul>
-    </div>
+      </div>
     )
   }
 }

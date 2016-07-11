@@ -9,27 +9,54 @@ class MobileSidebar extends React.Component{
 
   }
 
+  handleLanguageFilter(e) {
+    e.preventDefault();
+
+    var option = e.target.getAttribute('data-language')
+    var node = e.target.parentNode.parentNode.childNodes
+    console.log(node)
+    for(var i=0;i < node.length;i++){
+      node[i].firstChild.style.color = '#3e4152'
+    }
+    e.target.style.color = '#db4860'
+    this.props.languageFilter(e,option)
+
+
+  }
+
+  handleDifficultyFilter(e) {
+    e.preventDefault();
+    var option = e.target.getAttribute('data-difficulty')
+    var node = e.target.parentNode.parentNode.childNodes
+    console.log(node)
+    for(var i=0;i < node.length;i++){
+      node[i].firstChild.style.color = '#3e4152'
+    }
+    e.target.style.color = '#db4860'
+
+    this.props.difficultyFilter(e,option)
+  }
   render(){
     return(
-     <div className='filter-option-container'> 
+      <div className='filter-option-container'> 
+        <h3>Platform</h3>
         <ul className='sidebar-options'>
-          <h3>Platform</h3>
-          <li data-language = 'antroid' >Android</li>
-          <li data-language = 'ios' >IOS</li>
-          <li data-language = 'native' >React Native</li>
+          <li><button data-language = 'android'  onClick={this.handleLanguageFilter.bind(this)}>Android</button></li>
+          <li><button data-language = 'ios'  onClick={this.handleLanguageFilter.bind(this)}>IOS</button></li>
+          <li><button data-language = 'native' onClick={this.handleLanguageFilter.bind(this)}>React Native</button></li>
         </ul>
+        <h3>Difficulty</h3>        
         <ul className='sidebar-options'>
-          <h3>Difficulty</h3>
-          <li data-difficulty = 'easy' >Easy</li>
-          <li data-difficulty = 'medium' >Medium</li>
-          <li data-difficulty = 'hard' >Hard</li>
-        </ul>
-    </div>
-    )
-  }
-}
+          <li data-difficulty = 'easy' ><button data-difficulty='easy' onClick={this.handleDifficultyFilter.bind(this)}>Easy</button></li>
+          <li data-difficulty = 'medium' ><button data-difficulty='medium' onClick={this.handleDifficultyFilter.bind(this)}>Medium</button></li>
+          <li data-difficulty = 'hard' ><button data-difficulty='hard' onClick={this.handleDifficultyFilter.bind(this)}>Hard</button></li>
+          </ul>
+        </div>
+        )
+        }
+        }
 
 
-module.exports = MobileSidebar;
+        module.exports = MobileSidebar;
 
 

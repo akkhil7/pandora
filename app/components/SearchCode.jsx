@@ -33,7 +33,7 @@ class SearchCode extends React.Component{
 
     var keyword = this.refs.keyword.value.trim()
     var category = this.state.category
-    this.setState({isSearching:true, keyword: keyword})
+    this.setState({isSearching:true})
 
     var _data  = {
 
@@ -57,6 +57,31 @@ class SearchCode extends React.Component{
 
   }
 
+  handleLanguageFilter(e,language) {
+    console.log(language)
+    var category = this.state.category
+    var keyword = this.state.keyword
+    var data = {
+      category: category,
+      language: language
+    }
+    if(!_.isEmpty(keyword)) 
+      _data.keyword = keyword
+
+
+    var url = API.url('codes/search')
+    var _this = this
+    var success = function(res) {
+      console.log(res)
+      _this.setState({result: res, language: language})
+    }
+    var failure = (res) => {
+      console.log(res)
+      this.setState({isError: true})
+    }
+
+    API.post(url,data,success,failure)
+  }
   handleCategoryFilter(e,category) {
     console.log(category)
     
@@ -67,13 +92,10 @@ class SearchCode extends React.Component{
 
     var el = e.target
     var parent = el.parentNode.parentNode
-    console.log(parent)
     var li = parent.childNodes
-    //console.log(li)
     for(var i=0;i < li.length ;i++) {
       li[i].style.borderBottom = ''
     }
-    console.log(e)
     el.parentNode.style.borderBottom = '2px solid #db4860'
 
     var _this = this
@@ -91,6 +113,37 @@ class SearchCode extends React.Component{
     API.post(url,data,success,failure);
   }
 
+  handleDifficultyFilter(e,difficulty) {
+    
+    console.log(difficulty)
+
+    var keyword = this.state.keyword
+    var category = this.state.category
+    var language = this.state.language
+
+    var data = {
+      category: category,
+      difficulty: difficulty
+    }
+    if(!_.isEmpty(keyword))
+      data.keyword = keyword
+    if(!_.isEmpty(language))
+      data.language = language
+    
+    var url = API.url('codes/search')
+    
+    var success = (res) => {
+      console.log(res)
+      this.setState({result: res, difficulty: difficulty})
+    }
+
+    var failure = (res) => {
+      console.log(res)
+      this.setState({isError: true})
+    }
+
+    API.post(url,data,success,failure)
+  } 
 
   animateSearchbar() {
     var el = document.getElementsByClassName('search-options')[0]
@@ -145,9 +198,14 @@ class SearchCode extends React.Component{
                                    </div>
                                  </div>
                                  <div className="search-result-wrapper">
-                                   <MobileSidebar />
+                                   <MobileSidebar
+                                     languageFilter={this.handleLanguageFilter.bind(this)}
+                                     difficultyFilter={this.handleDifficultyFilter.bind(this)}
+                                   />
                                  <div className="filter-bar-wrapper">
-                                     <Filterbar categoryFilter={this.handleCategoryFilter.bind(this)}       
+                                   <Filterbar
+                                     categoryFilter={this.handleCategoryFilter.bind(this)}       
+                                   
                                      />   
                                      {displaySearchBar}
                                    </div>
