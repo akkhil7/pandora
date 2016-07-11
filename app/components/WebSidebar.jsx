@@ -52,9 +52,9 @@ class WebSidebar extends React.Component{
         </ul>
         <h3>Difficulty</h3>
         <ul className='sidebar-options'>
-          <li data-difficulty = 'easy' ><button data-difficulty = 'easy' onClick={this.handleDifficultyFilter.bind(this)} >Easy</button></li>
-          <li data-difficulty = 'medium' ><button data-difficulty = 'medium' onClick={this.handleDifficultyFilter.bind(this)} >Medium</button></li>
-          <li data-difficulty = 'hard' ><button data-difficulty = 'hard' onClick={this.handleDifficultyFilter.bind(this)} >Hard</button></li>
+          <li><button data-difficulty = 'easy' onClick={this.handleDifficultyFilter.bind(this)} >Easy</button></li>
+          <li><button data-difficulty = 'medium' onClick={this.handleDifficultyFilter.bind(this)} >Medium</button></li>
+          <li><button data-difficulty = 'hard' onClick={this.handleDifficultyFilter.bind(this)} >Hard</button></li>
         </ul>
       </div>
     )

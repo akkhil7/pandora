@@ -82,13 +82,30 @@ class SearchCode extends React.Component{
 
     API.post(url,data,success,failure)
   }
+
+
+  changeCategoryState(category) {
+
+    if(category=="web")
+      this.setState({isWeb: true, isMobile: false, isSnippet: false}, 
+                    this.animateSidebar.bind(this))
+                    else if(category=="mobile")
+                      this.setState({isMobile: true, isWeb: false, isSnippet: false},
+                                    this.animateSidebar.bind(this))
+                                    else
+                                      this.setState({isSnippet: true, isWeb: false, isMobile: false}, 
+                                                    this.animateSidebar.bind(this))
+
+  }
   handleCategoryFilter(e,category) {
     console.log(category)
-    
+
     var url = API.url('codes/search')
     var data = {
       category: category
     }
+
+    this.changeCategoryState(category);
 
     var el = e.target
     var parent = el.parentNode.parentNode
@@ -98,23 +115,23 @@ class SearchCode extends React.Component{
     }
     el.parentNode.style.borderBottom = '2px solid #db4860'
 
-    var _this = this
-    var success = function(res) {
+    //ANIMATION CHAIN BEGINNING GOES HERE
+    var success = (res) => {
       console.log(res)
-      _this.setState({result: res, category: category,
-                     searchable: true}, _this.animateSearchbar.bind(_this))
+      this.setState({result: res, category: category}, 
+                    this.animateCategoryMenu.bind(this))
     }
-    var failure = function(res) {
+    var failure = (res) => {
       console.log(res)
-      _this.setState({category: category,
-                     isError: true})
+      this.setState({category: category,
+                    isError: true})
     }
 
     API.post(url,data,success,failure);
   }
 
   handleDifficultyFilter(e,difficulty) {
-    
+
     console.log(difficulty)
 
     var keyword = this.state.keyword
@@ -129,9 +146,9 @@ class SearchCode extends React.Component{
       data.keyword = keyword
     if(!_.isEmpty(language))
       data.language = language
-    
+
     var url = API.url('codes/search')
-    
+
     var success = (res) => {
       console.log(res)
       this.setState({result: res, difficulty: difficulty})
@@ -145,17 +162,48 @@ class SearchCode extends React.Component{
     API.post(url,data,success,failure)
   } 
 
+  animateCategoryMenu() {
+    var el = document.getElementsByClassName('filter-bar')[0]
+    dynamics.animate(el, {
+      width: '74.41059%'
+    }, {
+      type: dynamics.bezier,
+      duration: 500,
+      points: [{"x":0,"y":0,"cp":[{"x":0.1,"y":0}]},{"x":1,"y":1,"cp":[{"x":0.9,"y":1}]}],
+
+      complete: this.toggleSearchable.bind(this)
+    })
+
+  }
+
+  toggleSearchable() {
+    this.setState({searchable: true}, this.animateSearchbar.bind(this))
+  }
+
   animateSearchbar() {
     var el = document.getElementsByClassName('search-options')[0]
     console.log(el)
     dynamics.animate(el, {
       translateY: 100
     }, {
-      type: dynamics.spring,
-      frequency: 200,
-      friction: 200,
-      duration: 1500
+      type: dynamics.gravity,
+      duration: 400
     })
+  }
+
+  animateSidebar() {
+    var isWeb = this.state.isWeb
+    var isMobile = this.state.isMobile
+    var isSnippet = this.state.isSnippet
+    var el = document.getElementsByClassName('filter-option-container')[0]
+    dynamics.animate(el, {
+      translateX: 200
+    }, {
+      type: dynamics.gravity,
+      duration: 400
+    })
+
+
   }
   render(){
 
@@ -171,6 +219,9 @@ class SearchCode extends React.Component{
 
     var flag = this.state.noMatchFlag
     var searchable = this.state.searchable
+    var isWeb = this.state.isWeb
+    var isMobile = this.state.isMobile
+    var isSnippet = this.state.isSnippet
 
     if(flag)
       var display = display_none
@@ -181,38 +232,57 @@ class SearchCode extends React.Component{
     else
       var display = ""
 
-    if(searchable)
-      var displaySearchBar = (            <div className="search-options">
-        <input ref="keyword" type="text" placeholder="Enter keyword" />
-        <button onClick={this.handleSubmit.bind(this)} 
-          className="search-button"> Search </button>
-      </div>
-                             )
-                             return(
-                               <div className="search-code-container">
-                                 <div className="header-wrapper">
-                                   <div className="header">
-                                     <div className="logo">
-                                       <img src="img/logo2.png" />
+
+
+    if(isWeb)
+      var displaySidebar =   <WebSidebar
+        languageFilter={this.handleLanguageFilter.bind(this)}
+        difficultyFilter={this.handleDifficultyFilter.bind(this)}
+      />
+      else if(isMobile)
+        var displaySidebar =    <MobileSidebar
+          languageFilter={this.handleLanguageFilter.bind(this)}
+          difficultyFilter={this.handleDifficultyFilter.bind(this)}
+        />
+        else if(isSnippet)
+          var displaySidebar =    <SnippetSidebar
+            languageFilter={this.handleLanguageFilter.bind(this)}
+            difficultyFilter={this.handleDifficultyFilter.bind(this)}
+          />
+          else
+            var displaySidebar = ""
+
+
+
+          if(searchable)
+            var displaySearchBar = ( <div className="search-options">
+              <input ref="keyword" type="text" placeholder="Enter keyword" />
+              <button onClick={this.handleSubmit.bind(this)} 
+                className="search-button"> Search </button>
+            </div>
+                                   )
+                                   return(
+                                     <div className="search-code-container">
+                                       <div className="header-wrapper">
+                                         <div className="header">
+                                           <div className="logo">
+                                             <img src="img/logo2.png" />
+                                           </div>
+                                         </div>
+                                       </div>
+                                       <div className="search-result-wrapper">
+                                         {displaySidebar}
+                                         <div className="filter-bar-wrapper">
+                                           <Filterbar
+                                             categoryFilter={this.handleCategoryFilter.bind(this)}       
+
+                                           />   
+                                           {displaySearchBar}
+                                         </div>
+                                         {display}
+                                       </div>
                                      </div>
-                                   </div>
-                                 </div>
-                                 <div className="search-result-wrapper">
-                                   <WebSidebar
-                                     languageFilter={this.handleLanguageFilter.bind(this)}
-                                     difficultyFilter={this.handleDifficultyFilter.bind(this)}
-                                   />
-                                 <div className="filter-bar-wrapper">
-                                   <Filterbar
-                                     categoryFilter={this.handleCategoryFilter.bind(this)}       
-                                   
-                                     />   
-                                     {displaySearchBar}
-                                   </div>
-                                   {display}
-                                 </div>
-                               </div>
-                              )
+                                   )
   }
 
 }
