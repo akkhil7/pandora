@@ -11,6 +11,7 @@ import Filterbar from './Filterbar.jsx';
 import WebSidebar from './WebSidebar.jsx';
 import MobileSidebar from './MobileSidebar.jsx';
 import SnippetSidebar from './SnippetSidebar.jsx';
+import dynamics from 'dynamics.js';
 
 class SearchCode extends React.Component{
   constructor(){
@@ -50,7 +51,7 @@ class SearchCode extends React.Component{
     var failure = function(res) {
       console.log(res)
       _this.setState({isError: true})
-      
+
     }
     API.post(url,_data,success,failure);
 
@@ -58,23 +59,50 @@ class SearchCode extends React.Component{
 
   handleCategoryFilter(e,category) {
     console.log(category)
+    
     var url = API.url('codes/search')
     var data = {
       category: category
     }
+
+    var el = e.target
+    var parent = el.parentNode.parentNode
+    console.log(parent)
+    var li = parent.childNodes
+    //console.log(li)
+    for(var i=0;i < li.length ;i++) {
+      li[i].style.borderBottom = ''
+    }
+    console.log(e)
+    el.parentNode.style.borderBottom = '2px solid #db4860'
+
     var _this = this
     var success = function(res) {
       console.log(res)
       _this.setState({result: res, category: category,
-      searchable: true})
+                     searchable: true}, _this.animateSearchbar.bind(_this))
     }
     var failure = function(res) {
       console.log(res)
       _this.setState({category: category,
-                      isError: true})
+                     isError: true})
     }
 
     API.post(url,data,success,failure);
+  }
+
+
+  animateSearchbar() {
+    var el = document.getElementsByClassName('search-options')[0]
+    console.log(el)
+    dynamics.animate(el, {
+      translateY: 100
+    }, {
+      type: dynamics.spring,
+      frequency: 200,
+      friction: 200,
+      duration: 1500
+    })
   }
   render(){
 
@@ -102,42 +130,34 @@ class SearchCode extends React.Component{
 
     if(searchable)
       var displaySearchBar = (            <div className="search-options">
-              <input ref="keyword" type="text" placeholder="Enter keyword" />
-              <button onClick={this.handleSubmit.bind(this)} 
-                className="search-button"> Search </button>
-            </div>
-)
-    return(
-      <div className="search-code-container">
-        <div className="header-wrapper">
-          <div className="header">
-            <div className="logo">
-              <img src="img/logo4.png" />
-            </div>
-          </div>
-        </div>
-        <div className="search-result-wrapper">
-<<<<<<< HEAD
-          < MobileSidebar />
-=======
-          <div className="filter-option-container">
-          </div>
->>>>>>> 204f364082ea834e151a2c2736354de6e60d9667
-          <div className="filter-bar-wrapper">
-            <Filterbar categoryFilter={this.handleCategoryFilter.bind(this)}       
-            />   
-            {displaySearchBar}
-          </div>
-          {display}
-        </div>
+        <input ref="keyword" type="text" placeholder="Enter keyword" />
+        <button onClick={this.handleSubmit.bind(this)} 
+          className="search-button"> Search </button>
       </div>
-
-    )
+                             )
+                             return(
+                               <div className="search-code-container">
+                                 <div className="header-wrapper">
+                                   <div className="header">
+                                     <div className="logo">
+                                       <img src="img/logo2.png" />
+                                     </div>
+                                   </div>
+                                 </div>
+                                 <div className="search-result-wrapper">
+                                   <MobileSidebar />
+                                 <div className="filter-bar-wrapper">
+                                     <Filterbar categoryFilter={this.handleCategoryFilter.bind(this)}       
+                                     />   
+                                     {displaySearchBar}
+                                   </div>
+                                   {display}
+                                 </div>
+                               </div>
+                              )
   }
 
 }
 
 module.exports = SearchCode;
-
-
 

@@ -4,7 +4,10 @@
 
 .filter-bar
   +span-columns(9)
+  +omega()
   height: 70px
+  border-bottom: 1px solid #d8d8d8
+
 
 .filter-section	
   +span-columns(12)
@@ -12,8 +15,14 @@
   height: auto
 
   li
-    +span-columns(3)
+    +span-columns(2)
     font-size: 0.9em
-    text-align: center
+
+    button
+      +span-columns(12)
+      background-color: white
+      color: black
+      font-size: 0.9em
+      font-weight: 200
 
 

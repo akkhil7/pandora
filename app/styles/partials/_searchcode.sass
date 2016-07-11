@@ -5,9 +5,8 @@
 
   .header-wrapper
     +span-columns(12)
-    padding-left: 10px
-    padding-top: 20px
-    background-color: #212121
+    padding: 15px 0px 10px 10px
+    background-color: #db4860
    
   
   .header
@@ -15,8 +14,6 @@
 
   .logo
     +span-columns(4)
-    margin-top: 8px
-    margin-bottom: 20px
 
 .search-result-wrapper
   +span-columns(12)
@@ -27,6 +24,10 @@
   +span-columns(3)
   +omega()
   padding-top: 10px
+  margin-top: -90px
+  border-bottom: 1px solid #d8d8d8
+  padding-bottom: 8px
+  
   
   h1
     font-size: 2.5em
@@ -35,6 +36,8 @@
     +span-columns(9)
     +omega()
     height: 30px
+    font-size: 0.9em
+    font-weight: 200
 
 
 .search-button
@@ -48,14 +51,34 @@
   +span-columns(3)
 
 
-
-
 .filter-option-container
   position: absolute
   left: 0
   top: 0
   width: 17.5%
   height: 100%
-  background-color: #ee4d68
-  box-shadow: 1px 0px 1px rgba(0,0,0,0.3)
+  background-color: white
+  box-shadow: 1px 0px 2px rgba(0,0,0,0.1)
+  color: #3e4152
+  font-weight: 100
+  font-size: 0.9em
+
+.sidebar-options
+  padding-top: 28px
+  margin-bottom: 20px
+  border-bottom: 1px solid #d8d8d8
+  padding-bottom: 25px
+  +span-columns(8)
+  +shift(2)
+
+  li
+    margin-bottom: 5px
+
+
+  h3
+    +span-columns(12)
+    text-align: center
+    margin-bottom: 30px
+    font-size: 1.1em
+    font-weight: 200
 

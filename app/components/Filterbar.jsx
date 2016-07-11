@@ -19,9 +19,9 @@ class Filterbar extends React.Component{
     return(
       <div className='filter-bar'>
         <ul className="filter-section">
-          <li data-filter-type="web" onClick={this.filterCategory.bind(this)}><span data-filter-type="web">WEB</span></li>
-          <li data-filter-type="mobile" onClick={this.filterCategory.bind(this)}><span data-filter-type="mobile">MOBILE</span></li>
-          <li data-filter-type="snippet" onClick={this.filterCategory.bind(this)}><span data-filter-type="snippet">SNIPPETS</span></li>
+          <li data-filter-type="web" onClick={this.filterCategory.bind(this)}><button data-filter-type="web">WEB</button></li>
+          <li data-filter-type="mobile" onClick={this.filterCategory.bind(this)}><button data-filter-type="mobile">MOBILE</button></li>
+          <li data-filter-type="snippet" onClick={this.filterCategory.bind(this)}><button data-filter-type="snippet">SNIPPETS</button></li>
         </ul>
       </div>
     )
