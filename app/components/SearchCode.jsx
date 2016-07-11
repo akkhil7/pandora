@@ -198,7 +198,7 @@ class SearchCode extends React.Component{
                                    </div>
                                  </div>
                                  <div className="search-result-wrapper">
-                                   <MobileSidebar
+                                   <WebSidebar
                                      languageFilter={this.handleLanguageFilter.bind(this)}
                                      difficultyFilter={this.handleDifficultyFilter.bind(this)}
                                    />
