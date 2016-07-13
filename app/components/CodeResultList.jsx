@@ -23,6 +23,7 @@ class CodeResultList extends React.Component{
 		})
 		return(
 			<div onScroll={this.handleInfinite.bind(this)} className="code-result-list">
+        <h3> <b>{codes.length}</b> CODES FOUND </h3>
                { display }
 			</div>
 			)

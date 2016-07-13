@@ -31,17 +31,19 @@ class CodeResultBox extends React.Component{
 		else if(diff =="medium")
 			var _classVar = "medium"
 		else
-			var _classVar = "hard"
+      var _classVar = "hard"
+
 		return(
 			<div key={code.id} className="code-result-box">
 			  <h1>{code.name}</h1>
 			  <h2 className={classVar}>{code.language}</h2>
 			  <h2 className={_classVar}>{code.difficulty}</h2>
-			  <button>view source</button>
+        <button>view source</button>
 			</div>
 			)
 	}	
 }
 
 module.exports = CodeResultBox;
+
 

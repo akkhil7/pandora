@@ -107,13 +107,7 @@ class SearchCode extends React.Component{
 
     this.changeCategoryState(category);
 
-    var el = e.target
-    var parent = el.parentNode.parentNode
-    var li = parent.childNodes
-    for(var i=0;i < li.length ;i++) {
-      li[i].style.borderBottom = ''
-    }
-    el.parentNode.style.borderBottom = '2px solid #db4860'
+
 
     //ANIMATION CHAIN BEGINNING GOES HERE
     var success = (res) => {
@@ -121,6 +115,7 @@ class SearchCode extends React.Component{
       this.setState({result: res, category: category}, 
                     this.animateCategoryMenu.bind(this))
     }
+    
     var failure = (res) => {
       console.log(res)
       this.setState({category: category,
@@ -222,15 +217,12 @@ class SearchCode extends React.Component{
     var isWeb = this.state.isWeb
     var isMobile = this.state.isMobile
     var isSnippet = this.state.isSnippet
+    var result = this.state.result
 
-    if(flag)
-      var display = display_none
-    else if(true)
-      var display = <CodeResultList codes={this.state.newResult} />
-    else if(!_.isEmpty(this.state.result))
-      var display = <CodeResultList codes={this.state.result} />
+    if(!_.isEmpty(result))
+      var displayResult = <CodeResultList codes={this.state.result} />
     else
-      var display = ""
+      var displayResult = display_none
 
 
 
@@ -275,11 +267,10 @@ class SearchCode extends React.Component{
                                          <div className="filter-bar-wrapper">
                                            <Filterbar
                                              categoryFilter={this.handleCategoryFilter.bind(this)}       
-
                                            />   
                                            {displaySearchBar}
+                                           {displayResult}
                                          </div>
-                                         {display}
                                        </div>
                                      </div>
                                    )

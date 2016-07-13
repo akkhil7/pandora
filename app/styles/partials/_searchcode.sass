@@ -21,8 +21,7 @@
   position: relative
 
 .search-options
-  +span-columns(3)
-  +omega()
+  +span-columns(3, $display: block-collapse)
   padding-top: 10px
   margin-top: -90px
   padding-bottom: 8px
@@ -36,22 +35,18 @@
   input
     +span-columns(8)
     +shift(1)
-    +omega()
     height: 30px
-    
     font-size: 0.9em
     font-weight: 200
 
 
 .search-button
-  +span-columns(2)
+  +span-columns(3)
   +omega()
   background-color: #db4860
   height: 30px
   font-size: 0.8em
 
-.select
-  +span-columns(3)
 
 
 .filter-option-container

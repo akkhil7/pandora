@@ -12,6 +12,13 @@ class Filterbar extends React.Component{
   filterCategory(e){
     e.preventDefault();
     var category = e.target.getAttribute('data-filter-type')
+    var el = e.target
+    var parent = el.parentNode.parentNode
+    var li = parent.childNodes
+    for(var i=0;i < li.length ;i++) {
+      li[i].style.borderBottom = ''
+    }
+    el.parentNode.style.borderBottom = '2px solid #db4860'
     this.props.categoryFilter(e,category)
   }
 
