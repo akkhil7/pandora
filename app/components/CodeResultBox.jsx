@@ -1,7 +1,7 @@
 import React from 'react';
 import Router from 'react-router';
 import Request from 'superagent';
-
+import {Link} from 'react-router';
 
 
 class CodeResultBox extends React.Component{
@@ -38,7 +38,7 @@ class CodeResultBox extends React.Component{
 			  <h1>{code.name}</h1>
 			  <h2 className={classVar}>{code.language}</h2>
 			  <h2 className={_classVar}>{code.difficulty}</h2>
-        <button>view source</button>
+              <Link to='codedesc' params={{id: code.id}}><button>view source</button></Link>
 			</div>
 			)
 	}	
