@@ -1,2 +1,72 @@
 .description-container
-	+span-columns(12)
+  +span-columns(12)
+  height: 100%
+
+.header-wrapper
+  +span-columns(12)
+  padding: 0px 0px 0px 10px
+  background-color: #db4860
+
+
+.header
+  +outer-container(70%)
+
+  .logo
+    +span-columns(4)
+    margin-top: 15px
+    margin-bottom: 10px
+
+  button:hover
+    background-color: #b52b41
+
+.sign-in
+  +span-columns(2)
+  +shift(6)
+  font-weight: 400
+  font-size: 0.9em
+  border-radius: 0px
+  color: white
+  background-color: #db4860
+  height: 60px
+
+.code-desc-wrapper
+  +outer-container(70%)
+  padding-left: 10px
+  
+.code-desc-header
+  +span-columns(12)
+  margin-top: 20px
+
+
+  h1
+    +span-columns(12)
+    font-size: 1.75em
+    font-weight: 400
+
+  p
+    +span-columns(12)
+    font-weight: 200
+
+.code-desc-body
+  margin-top: 20px
+  +span-columns(12)
+
+  h2
+    +span-columns(4)
+    +omega()
+    font-weight: 400
+
+  h3
+    +span-columns(4)
+    +omega()
+    font-weight: 200
+    
+  .star-rating
+    +span-columns(4)
+
+  .rsr-root
+    +span-columns(4)
+
+    .rating-gly-star
+      +span-columns(4)
+
