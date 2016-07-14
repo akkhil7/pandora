@@ -18,11 +18,25 @@ class CodeResultBox extends React.Component{
 		var language = code.language
 		var diff = code.difficulty
 		if(language == "ruby")
-			var classVar = "red"
+			var classVar = "ruby"
 		else if(language == "python")
-			var classVar = "green"
+			var classVar = "python"
 		else if(language == "javascript")
-			var classVar = "yellow"
+			var classVar = "javascript"
+		else if(language == "clojure")
+			var classVar = "clojure"
+		else if(language == "haskell")
+			var classVar = "haskell"
+		
+		else if(language == "android")
+			var classVar = "android"
+		else if(language == "reactnative")
+			var classVar = "native"
+		
+
+		else if(language == "c#")
+			var classVar = "chash"
+
 		else
 			var classVar = "grey"
 

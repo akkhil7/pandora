@@ -8,6 +8,7 @@
 @import "partials/createcode.sass";
 @import "partials/filterbar.sass";
 @import "partials/homepage.sass";
+@import "partials/codedesc.sass";
 
 input:focus {
   outline: none;
@@ -32,21 +33,7 @@ input:focus {
 .medium {
   background-color: #6dc6c2;
 }
-.red {
-  background-color: red;
-}
 
-.green {
-  background-color: #77ff94;
-}
-
-.yellow {
-  background-color: yellow;
-}
-
-.grey {
-  background-color : #ccc
-}
 body {
   font-family: 'Helvetica', 'Arial';
   height: 100%;

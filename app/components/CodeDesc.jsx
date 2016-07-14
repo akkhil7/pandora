@@ -21,9 +21,15 @@ class CodeDesc extends React.Component{
 
 	render(){
 		return(
-			<div>
-				<UserNavbar />
+		<div  className = 'description-container'>
+			<div className="header-wrapper">
+                <div className="header">
+                    <div className="logo">
+                        <img src="img/logo2.png" />
+                    </div>
+                </div>
             </div>
+         </div>   
 			)
 	}
 }
