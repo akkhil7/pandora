@@ -46,7 +46,17 @@ class CodeDesc extends React.Component{
       var display = <h3 style={{color: '#db4860'}}> Thanks for rating!</h3>
     else
       var display = <StarRating className="star-rating" name="airbnb-rating" size={20}
-             totalStars={5} onRatingClick={this.handleRate.bind(this)} />
+        totalStars={5} onRatingClick={this.handleRate.bind(this)} />
+
+    if(_.isEmpty(code.app_link))
+      var displayButton = (<div className="btn-wrapper">
+                            <button className="link-btn"> View Github </button>
+                            <button className="link-btn"> View Website </button>
+                           </div>
+                          )
+    else
+      var displayButton = <button className="link-btn"> View Github </button>
+        
           
   return(
       <div  className = 'description-container'>
@@ -64,12 +74,15 @@ class CodeDesc extends React.Component{
             <p>{code.description}</p>
           </div>
           <div className="code-desc-body">
-            <h2> Difficulty </h2>
-            <h2> Language </h2>
-            <h2> Rating <small>(4.6/5)</small> </h2>
-            <h3> {diff} </h3>
-            <h3>{lang}</h3>
-            {display}
+            <div className="code-desc-options">
+              <h2> Difficulty </h2>
+              <h2> Language </h2>
+              <h2> Rating <small>(4.6/5)</small> </h2>
+              <h3> {diff} </h3>
+              <h3>{lang}</h3>
+              {display}
+            </div>
+            {displayButton}
           </div>
         </div>
       </div>   
