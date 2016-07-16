@@ -17,10 +17,8 @@ class HomePage extends React.Component{
       translateY: 200,
       opacity: 1
     }, {
-      type: dynamics.spring,
-      frequency: 200,
-      friction: 200,
-      duration: 1000
+      type: dynamics.linear,
+      duration: 1500
     })
   }
 
@@ -28,7 +26,7 @@ class HomePage extends React.Component{
     return (
       <div id="homepage-wrapper">
         <div className="container">
-          <h2>&lt;CodeDammit/&gt;</h2>
+          <img src="img/logo2.png" />
           <button className="submit"> Submit Your Code </button>
           <h3>You can find all the <em>"codedamn"</em> gods here.</h3>
 

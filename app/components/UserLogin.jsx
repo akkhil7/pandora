@@ -29,12 +29,12 @@ class UserLogin extends React.Component{
 	}
 	render(){
 		return(
-			<div>
-				<div className='login-bg'></div>
-				<div className='login'>
+			<div className='login-bg'>
+        <div className='login-box'>
+          <h3> Login </h3>
 					<input ref="username" type="text" placeholder="username" />
 					<input ref="password" type="password" placeholder="password" />
-					<input type="submit" value="Login" className="submit-long" onClick={this.handleLogin.bind(this)}/>
+          <button className="submit-long" onClick={this.handleLogin.bind(this)}> Log me in! </button>
 				</div>
 			</div>
 			)

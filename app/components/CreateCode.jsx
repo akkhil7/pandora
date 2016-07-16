@@ -82,7 +82,7 @@ class CreateCode extends React.Component{
 			<div>
 				<UserNavbar/>
 				<div className='createcode-wrapper'>
-					<input ref="name" type="text" placeholder="Enter Name" name="code name"/>
+					<input ref="name" type="text" placeholder="Enter Name" />
 					
 					<Select
 					name='language-select'
