@@ -7,7 +7,8 @@ import UserDashBoard from './components/UserDashBoard.jsx';
 import SearchCode from './components/SearchCode.jsx';
 import CreateCode from './components/CreateCode.jsx';
 import CodeDesc from './components/CodeDesc.jsx' ;
-import HomePage from './components/HomePage.jsx'
+import HomePage from './components/HomePage.jsx';
+import Term from './components/Term.jsx';
 
 
 var routes = (
@@ -19,6 +20,7 @@ var routes = (
   	<Route name="searchcode" path="search" handler={ SearchCode } />
   	<Route name="createcode" path="create" handler={ CreateCode } />
   	<Route name="codedesc" path="codes/:id" handler={ CodeDesc } />
+  	<Route name="term" path="term" handler={ Term } />
   </Route>
 );
 
