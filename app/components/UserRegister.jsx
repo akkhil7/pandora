@@ -34,17 +34,17 @@ class UserRegister extends React.Component{
 
 	render(){
 		return(
-			<div>
-		    <div className="register-bg"> </div>	
-				<div className="register">
-            		<input ref="firstname" type="text" placeholder="First Name" name="first name" />
+		    <div className="container-bg"> 	
+          <div className="container-box">
+            <h3> Register </h3>
+          <input ref="firstname" type="text" placeholder="First Name" name="first name" />
 					<input ref="lastname" type="text" placeholder="Last Name" name="last name" />
 					<input ref="email" type="text" placeholder="Email" name="email" /> 
 					<input ref="username" type="text" placeholder="Username" name="username" />
 					<input ref="password" type="password" placeholder="Password" name="password" />
-            		<input type="submit" value="Register" className="submit-long" onClick={this.registerUser.bind(this)}/>
+          <button className="submit-long" onClick={this.registerUser.bind(this)}> Register </button>
 				</div>
-			</div>
+      </div>
 			)
 	}
 
