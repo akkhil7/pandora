@@ -29,8 +29,8 @@ class UserLogin extends React.Component{
 	}
 	render(){
 		return(
-			<div className='login-bg'>
-        <div className='login-box'>
+			<div className='container-bg'>
+        <div className='container-box'>
           <h3> Login </h3>
 					<input ref="username" type="text" placeholder="username" />
 					<input ref="password" type="password" placeholder="password" />
