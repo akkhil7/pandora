@@ -1,8 +1,46 @@
+.createcode-outer-wrapper
+	height: 100%
+
+ .header-container
+ 	background: #db4860
+ 	margin-top: 0px
+
+ 	.header
+ 		+outer-container
+
 .createcode-wrapper
-	+span-columns(12)
+	+outer-container
 	border-radius: 5px
 	background-color: #ececec
 	box-shadow: 0 0 2px 0 rgba(0,0,0,0.3)
-	padding: 20px
-	margin-top: 20px
-	margin-bottom: 20px
+	margin-top: 50px
+	
+
+	.code-container
+		+span-columns(10)
+		+shift(1)
+		padding: 20px 0px
+
+		.code_name
+			+span-columns(6)
+
+
+		.select
+			+span-columns(6)
+			+omega()
+			margin-bottom: 0.75em
+
+		.difficulty-field
+			margin-right: 0
+			+span-columns(6)
+
+		.github_link
+	  		+span-columns(6)
+	  		+omega()
+
+		.app_link
+			+span-columns(6)
+		
+
+		.submit_long
+			+span-columns(12)

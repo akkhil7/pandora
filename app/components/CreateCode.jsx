@@ -4,6 +4,7 @@ import UserNavbar from './UserNavbar.jsx';
 import Request from 'superagent';
 import Select from 'react-select';
 import API from './API.js';
+import TagsInput from 'react-tagsinput'
 
 class CreateCode extends React.Component{
 	constructor(){
@@ -72,17 +73,28 @@ class CreateCode extends React.Component{
 		]
 
 		var c_options =[
-            { value: 'exercise', label:'Code Exercise' },
             { value: 'web',label:'Web App'},
             { value: 'mobile',label:'Mob App'},
             { value: 'snippet',label:'Code Snippet'}
 		]
 		  
 		return(
-			<div>
-				<UserNavbar/>
+			<div className = 'createcode-outer-wrapper'>
+				 <div className="header-container">
+         			 <div className="header">
+            			<div className="logo">
+              				<img src="img/logo2.png" />
+            			</div>
+            			<button className='sign-in'>Login / Register</button>
+          			</div>
+        		</div>
 				<div className='createcode-wrapper'>
-					<input ref="name" type="text" placeholder="Enter Name" />
+
+
+
+					<div className='code-container'>
+					<input ref="name" type="text" placeholder="Enter Name" className="code_name"/>
+
 					
 					<Select
 					name='language-select'
@@ -94,25 +106,25 @@ class CreateCode extends React.Component{
 
 					<Select
 					name='difficulty-select'
-					className='select'
+					className='difficulty-field'
 					value={difficulty}
 					onChange={this.changeDiff.bind(this)}
 					options={d_options}
 					/>
-
-					<input ref="app_link" type="text" placeholder="App link" name="app link" />
-					<input ref="github_link" type="text" placeholder="Github link" name="github link" />	
-
-					<Select
+                     
+                    <Select
 					name='category-select'
 					className='select'
 					value={category}
 					onChange={this.changeCat.bind(this)}
 					options={c_options}
 					/>
-
-				    <textarea ref="description" id="txtArea" rows="8" placeholder="App description"></textarea>
-				    <input type="submit" value="Submit" className="submit-long" onClick={this.handleSubmit.bind(this)}/>
+					
+					<input ref="app_link" type="text" placeholder="App link" className="app_link" />
+					<input ref="github_link" type="text" placeholder="Github link" className="github_link" />	
+                    <textarea ref="description" id="txtArea" rows="8" placeholder="App description"></textarea>
+				    <input type="submit" value="Submit" className="submit_long" onClick={this.handleSubmit.bind(this)}/>
+					</div>
 				</div>
 			</div>
 			)
