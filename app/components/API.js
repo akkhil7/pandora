@@ -2,10 +2,10 @@ import Request from 'superagent';
 
 var API = {
 
-	mode: "development",
+	mode: "production",
 
 	__root: function() {
-		return this.mode === "development" ? "http://localhost:3000/" : ""
+		return this.mode === "development" ? "http://localhost:3000/" : "https://whispering-refuge-32373.herokuapp.com/"
 	},
 
 
@@ -43,6 +43,7 @@ var API = {
 		var _this = this;
 		console.log(data)
         Request.post(url)
+        .set('Authorization', 'Token token='+localStorage.codedammit_token)        
         .send(data)
         .end(function (err,res) {
         	_this.handleRequest(res,success,failure)

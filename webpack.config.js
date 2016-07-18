@@ -1,13 +1,15 @@
 var webpack = require('webpack');
 var path = require('path');
 
+/*    'webpack-dev-server/client?http://0.0.0.0',
+    'webpack/hot/only-dev-server',
+*/
+
 module.exports = {
   entry: [
-    'webpack-dev-server/client?http://0.0.0.0:8080',
-    'webpack/hot/only-dev-server',
     './app/main.js'
   ],
-  devtool: process.env.WEBPACK_DEVTOOL || 'source-map',
+  devtool: process.env.WEBPACK_DEVTOOL || 'cheap-module-source-map',
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'app.js'

@@ -1,7 +1,7 @@
 "use strict";
 
 import React from 'react';
-import Router from 'react-router';
+import Router, {Link} from 'react-router';
 import Request from 'superagent';
 import _ from 'lodash';
 import dynamics from 'dynamics.js'
@@ -11,6 +11,11 @@ class HomePage extends React.Component{
     super()
   }
 
+  handleClick(e) {
+    e.preventDefault();
+    var type = e.target.getAttribute('data-type')
+    this.context.router.transitionTo('searchcode', null, {category: type})
+  }
   componentDidMount() {
     var el = document.getElementsByClassName('container')[0]
     dynamics.animate(el, {
@@ -18,7 +23,7 @@ class HomePage extends React.Component{
       opacity: 1
     }, {
       type: dynamics.linear,
-      duration: 1500
+      duration: 800
     })
   }
 
@@ -26,16 +31,25 @@ class HomePage extends React.Component{
     return (
       <div id="homepage-wrapper">
         <div className="container">
-          <img src="img/logo2.png" />
-          <button className="submit"> Submit Your Code </button>
+          <Link to="app"><img src="img/logo2.png" /></Link>
+          <Link to="createcode"><button className="submit"> Submit Your Code </button></Link>
           <h3>You can find all the <em>"codedamn"</em> gods here.</h3>
-
-          <input type="text" name="search" placeholder="Enter keyword or language"/>
-          <button className="search"> SEARCH </button>
+          <button data-type="web" onClick={this.handleClick.bind(this)} className="search"> Web </button>
+          <button data-type="mobile" onClick={this.handleClick.bind(this)} className="search"> Mobile </button>
+          <button data-type="snippet"onClick={this.handleClick.bind(this)} className="search"> Snippets </button>
         </div>
+        <footer>
+          <h1> Help us by contributing GitHub codes! </h1>
+          <h6> Copyright © CodeDammit 2016 </h6>
+        </footer>
       </div>
     );
   }
 }
+
+HomePage.contextTypes = {
+  router: React.PropTypes.func.isRequired
+}
+
 
 module.exports = HomePage;

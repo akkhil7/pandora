@@ -1,5 +1,5 @@
 import React from 'react';
-import Router from 'react-router';
+import Router , { Link } from 'react-router';
 import Request from 'superagent';
 import UserNavbar from './UserNavbar.jsx';
 import Select from 'react-select';
@@ -26,6 +26,13 @@ class SearchCode extends React.Component{
       difficulty: "",
       language: ""
     }
+  }
+
+  componentDidMount() {
+    var category = this.props.query.category
+    console.log(this.props.query.category)
+    if(!_.isEmpty(category))
+      this.handleCategoryFilter(null, category)
   }
 
   handleSubmit(e) {
@@ -115,7 +122,7 @@ class SearchCode extends React.Component{
       this.setState({result: res, category: category}, 
                     this.animateCategoryMenu.bind(this))
     }
-    
+
     var failure = (res) => {
       console.log(res)
       this.setState({category: category,
@@ -202,13 +209,6 @@ class SearchCode extends React.Component{
   }
   render(){
 
-    var options = [
-      { value: 'ruby', label: 'Ruby' },
-      { value: 'python', label: 'Python' },
-      { value: 'javascript', label: 'Javascript' },
-      { value: 'java', label: 'Java' }
-    ];
-
     var display_none = <h2 className="no-result"> No Results </h2>
     var language = this.state.language
 
@@ -221,6 +221,8 @@ class SearchCode extends React.Component{
 
     if(!_.isEmpty(result))
       var displayResult = <CodeResultList codes={this.state.result} />
+    else if(!searchable)
+      var displayResult = ""
     else
       var displayResult = display_none
 
@@ -258,8 +260,9 @@ class SearchCode extends React.Component{
                                        <div className="header-wrapper">
                                          <div className="header">
                                            <div className="logo">
-                                             <img src="img/logo2.png" />
+                                             <Link to="app"> <img src="img/logo2.png" /> </Link>
                                            </div>
+                                           <Link to="app"><button className='sign-in'>Login / Register</button></Link>
                                          </div>
                                        </div>
                                        <div className="search-result-wrapper">
@@ -272,6 +275,10 @@ class SearchCode extends React.Component{
                                            {displayResult}
                                          </div>
                                        </div>
+                                       <footer>
+                                         <h6> Copyright © CodeDammit 2016 </h6>
+                                       </footer>
+
                                      </div>
                                    )
   }

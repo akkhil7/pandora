@@ -2,8 +2,8 @@
   +span-columns(12 of 12)
   height: 100%
   background: #D38312 
-  background: -webkit-linear-gradient(to left, #556270 , #db4860) 
-  background: linear-gradient(to left, #556270 , #db4860) 
+  background: -webkit-linear-gradient(to top, #556270 , #db4860) 
+  background: linear-gradient(to top, #556270 , #db4860) 
   
 .container
   margin-top: -200px
@@ -18,7 +18,8 @@
 
   .submit
     +span-columns(2.5)
-    +shift(7)
+    +shift(7.5)
+    +omega()
     height: 35px
     background-color: #f1a727
     font-size: 0.9em
@@ -74,10 +75,31 @@
     color:    #white
     
   .search
-    +span-columns(2)
+    +span-columns(4)
     height: 50px
-    margin-top: 20px
-    border-top-left-radius: 0px
-    border-bottom-left-radius: 0px
-    background-color: #d43e6c
-    +omega()
+    margin-top: 60px
+    background-color: rgba(0,0,0,0.3)
+    font-weight: 300
+
+  .search:hover
+    box-shadow: 0px 0px 10px rgba(255,218,12,0.7)
+
+
+footer
+  +span-columns(12)
+  position: absolute
+  bottom: 0
+  left: 0
+
+  h1
+    text-align: center
+    color: #db4860
+    font-weight: 200
+    font-size: 0.85em
+  
+  h6
+    +span-columns(12)
+    color: white
+    text-align: center
+    font-size: 0.8em
+    font-weight: 200
