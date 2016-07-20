@@ -85,3 +85,24 @@ html {
   background: -webkit-linear-gradient(to top,#114357 , #F29492);
   background: linear-gradient(to bottom, #114357 , #F29492);
 }
+
+#loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+
+  img {
+    @include span-columns(1);
+    @include shift(5.5);
+    margin-top: 10%;
+  }
+
+  h1 {
+    @include span-columns(12);
+    text-align: center;
+    margin-top: 20px;
+    font-weight: 200;
+  }
+}

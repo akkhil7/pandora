@@ -31,6 +31,7 @@ class SearchCode extends React.Component{
   componentDidMount() {
     var category = this.props.query.category
     console.log(this.props.query.category)
+    console.log(this.state.isSearching)
     if(!_.isEmpty(category))
       this.handleCategoryFilter(null, category)
   }
@@ -53,11 +54,11 @@ class SearchCode extends React.Component{
     var url = API.url('codes/search')
     var success = function(res) {
       console.log(res)
-      _this.setState({result : res, keyword: keyword})
+      _this.setState({result : res, keyword: keyword, isSearching: false})
     }
     var failure = function(res) {
       console.log(res)
-      _this.setState({isError: true})
+      _this.setState({isError: true, isSearching: false})
 
     }
     API.post(url,_data,success,failure);
@@ -68,6 +69,9 @@ class SearchCode extends React.Component{
     console.log(language)
     var category = this.state.category
     var keyword = this.state.keyword
+    
+    this.setState({isSearching:true})
+
     var data = {
       category: category,
       language: language
@@ -112,6 +116,8 @@ class SearchCode extends React.Component{
       category: category
     }
 
+    this.setState({isSearching:true})
+
     this.changeCategoryState(category);
 
 
@@ -119,13 +125,14 @@ class SearchCode extends React.Component{
     //ANIMATION CHAIN BEGINNING GOES HERE
     var success = (res) => {
       console.log(res)
-      this.setState({result: res, category: category}, 
+      this.setState({result: res, category: category, isSearching: false}, 
                     this.animateCategoryMenu.bind(this))
     }
 
     var failure = (res) => {
       console.log(res)
       this.setState({category: category,
+                    isSearching: false,
                     isError: true})
     }
 
@@ -219,10 +226,17 @@ class SearchCode extends React.Component{
     var isSnippet = this.state.isSnippet
     var result = this.state.result
 
-    if(!_.isEmpty(result))
+    if(this.state.isSearching)
+      var displayResult = (<div className="loader">
+                              <img src="img/loading.gif" />
+                              <h1> Loading... Please wait a moment! </h1>
+                            </div>)
+    else if(!_.isEmpty(result))
       var displayResult = <CodeResultList codes={this.state.result} />
+
     else if(!searchable)
       var displayResult = ""
+
     else
       var displayResult = display_none
 
@@ -232,19 +246,19 @@ class SearchCode extends React.Component{
       var displaySidebar =   <WebSidebar
         languageFilter={this.handleLanguageFilter.bind(this)}
         difficultyFilter={this.handleDifficultyFilter.bind(this)}
-      />
-      else if(isMobile)
-        var displaySidebar =    <MobileSidebar
+        />
+    else if(isMobile)
+      var displaySidebar =    <MobileSidebar
           languageFilter={this.handleLanguageFilter.bind(this)}
           difficultyFilter={this.handleDifficultyFilter.bind(this)}
-        />
-        else if(isSnippet)
-          var displaySidebar =    <SnippetSidebar
+          />
+    else if(isSnippet)
+      var displaySidebar =    <SnippetSidebar
             languageFilter={this.handleLanguageFilter.bind(this)}
             difficultyFilter={this.handleDifficultyFilter.bind(this)}
-          />
-          else
-            var displaySidebar = ""
+            />
+    else
+      var displaySidebar = ""
 
 
 

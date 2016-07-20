@@ -78,7 +78,21 @@ class CreateCode extends React.Component{
   changeCat(val){
     this.setState({ category: val})
   }
-  render(){
+
+  render() {
+    return this.state.isLoggedIn ? this.renderContent() : this.renderLoader()
+  }
+
+  renderLoader() {
+    return(
+    <div id="loader">
+      <img src="img/loading.gif" />
+      <h1> Loading... Please wait a moment! </h1>
+    </div>
+    )
+  }
+  
+  renderContent(){
     var language=this.state.language
     var difficulty=this.state.difficulty
     var category=this.state.category
