@@ -48,7 +48,6 @@ class SearchCode extends React.Component{
     var failure = (res) => {
       console.log("Failed to verify")
       console.log(res)
-      this.context.router.transitionTo('login')
     }
 
     API.post(url,data,success,failure)

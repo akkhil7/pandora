@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, DefaultRoute, NotFoundRoute } from 'react-router';
+import { Route, DefaultRoute, NotFoundRoute, browserHistory } from 'react-router';
 import App from './components/App.jsx';
 import UserRegister from './components/UserRegister.jsx';
 import UserLogin from './components/UserLogin.jsx';
