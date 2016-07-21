@@ -52,7 +52,7 @@ class SnippetSidebar extends React.Component{
           <li><button data-language = 'c#' onClick={this.handleLanguageFilter.bind(this)} >C#</button></li>
           <li><button data-language = 'clojure' onClick={this.handleLanguageFilter.bind(this)} >Clojure</button></li>
           <li><button data-language = 'haskell' onClick={this.handleLanguageFilter.bind(this)} >Haskell</button></li>
-          <li><button data-language = 'html' onClick={this.handleLanguageFilter.bind(this)} >HTML and CSS</button></li>
+          <li><button data-language = 'html' onClick={this.handleLanguageFilter.bind(this)} >HTML/CSS</button></li>
         </ul>
         <h3>Difficulty</h3>
 

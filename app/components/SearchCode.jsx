@@ -6,7 +6,6 @@ import Select from 'react-select';
 import _ from 'lodash';
 import CodeResultList from './CodeResultList.jsx';
 import API from './API.js';
-//import $ from 'jquery';
 import Filterbar from './Filterbar.jsx';
 import WebSidebar from './WebSidebar.jsx';
 import MobileSidebar from './MobileSidebar.jsx';
@@ -30,39 +29,73 @@ class SearchCode extends React.Component{
 
   componentDidMount() {
     var category = this.props.query.category
-    console.log(this.props.query.category)
-    console.log(this.state.isSearching)
     if(!_.isEmpty(category))
       this.handleCategoryFilter(null, category)
+
+    var token = localStorage.codedammit_token
+
+    var data = {
+      token: token
+    }
+
+    var url = API.url('tokens/verify_token')
+
+    var success = (res) => {
+      console.log(res)
+      this.setState({user:res, isLoggedIn: true})
+    }
+
+    var failure = (res) => {
+      console.log("Failed to verify")
+      console.log(res)
+      this.context.router.transitionTo('login')
+    }
+
+    API.post(url,data,success,failure)
+
+
+  }
+  componentWillReceiveProps(nextProps) {
+    var category = nextProps.query.category
+    console.log(nextProps.query.category)
+    
+    if(!_.isEmpty(category))
+      this.handleCategoryFilter(null, category)
+
   }
 
   handleSubmit(e) {
-    e.preventDefault();
 
+    //e.preventDefault();
+    console.log(e.which)
     var keyword = this.refs.keyword.value.trim()
     var category = this.state.category
-    this.setState({isSearching:true})
 
-    var _data  = {
+    if(e.which == 13)
+      {
+        this.setState({isSearching:true})
 
-      keyword: keyword,
-      category: category
+        var _data  = {
 
-    }
+          keyword: keyword,
+          category: category
 
-    var _this = this
-    var url = API.url('codes/search')
-    var success = function(res) {
-      console.log(res)
-      _this.setState({result : res, keyword: keyword, isSearching: false})
-    }
-    var failure = function(res) {
-      console.log(res)
-      _this.setState({isError: true, isSearching: false})
+        }
 
-    }
-    API.post(url,_data,success,failure);
+        var _this = this
+        var url = API.url('codes/search')
+        var success = function(res) {
+          console.log(res)
+          _this.setState({result : res, keyword: keyword, isSearching: false})
+        }
+        var failure = function(res) {
+          console.log(res)
+          _this.setState({isError: true, isSearching: false})
 
+        }
+        API.post(url,_data,success,failure);
+
+      }
   }
 
   handleLanguageFilter(e,language) {
@@ -77,18 +110,18 @@ class SearchCode extends React.Component{
       language: language
     }
     if(!_.isEmpty(keyword)) 
-      _data.keyword = keyword
+      data.keyword = keyword
 
 
     var url = API.url('codes/search')
     var _this = this
     var success = function(res) {
       console.log(res)
-      _this.setState({result: res, language: language})
+      _this.setState({result: res, language: language, isSearching: false})
     }
     var failure = (res) => {
       console.log(res)
-      this.setState({isError: true})
+      this.setState({isError: true, isSearching: false})
     }
 
     API.post(url,data,success,failure)
@@ -99,15 +132,21 @@ class SearchCode extends React.Component{
 
     if(category=="web")
       this.setState({isWeb: true, isMobile: false, isSnippet: false}, 
-                    this.animateSidebar.bind(this))
-                    else if(category=="mobile")
-                      this.setState({isMobile: true, isWeb: false, isSnippet: false},
-                                    this.animateSidebar.bind(this))
-                                    else
-                                      this.setState({isSnippet: true, isWeb: false, isMobile: false}, 
-                                                    this.animateSidebar.bind(this))
+                     this.animateSidebar.bind(this))
+    else if(category=="mobile")
+      this.setState({isMobile: true, isWeb: false, isSnippet: false},
+                     this.animateSidebar.bind(this))
+    else
+      this.setState({isSnippet: true, isWeb: false, isMobile: false}, 
+                     this.animateSidebar.bind(this))
 
   }
+
+  handleCategoryChange(e,category) {
+    e.preventDefault();
+    this.context.router.transitionTo('searchcode',null,{category: category})
+  }
+
   handleCategoryFilter(e,category) {
     console.log(category)
 
@@ -142,6 +181,7 @@ class SearchCode extends React.Component{
   handleDifficultyFilter(e,difficulty) {
 
     console.log(difficulty)
+    this.setState({isSearching:true})
 
     var keyword = this.state.keyword
     var category = this.state.category
@@ -160,12 +200,12 @@ class SearchCode extends React.Component{
 
     var success = (res) => {
       console.log(res)
-      this.setState({result: res, difficulty: difficulty})
+      this.setState({result: res, difficulty: difficulty, isSearching: false})
     }
 
     var failure = (res) => {
       console.log(res)
-      this.setState({isError: true})
+      this.setState({isError: true, isSearching: false})
     }
 
     API.post(url,data,success,failure)
@@ -214,8 +254,8 @@ class SearchCode extends React.Component{
 
 
   }
-  render(){
 
+  render(){
     var display_none = <h2 className="no-result"> No Results </h2>
     var language = this.state.language
 
@@ -241,6 +281,10 @@ class SearchCode extends React.Component{
       var displayResult = display_none
 
 
+    if(this.state.isLoggedIn)
+      var displayNav = <h1> Welcome, {_.capitalize(this.state.user.username)} </h1>
+    else
+      var displaynav = <Link to="app"><button className='sign-in'>Login / Register</button></Link> 
 
     if(isWeb)
       var displaySidebar =   <WebSidebar
@@ -264,9 +308,7 @@ class SearchCode extends React.Component{
 
           if(searchable)
             var displaySearchBar = ( <div className="search-options">
-              <input ref="keyword" type="text" placeholder="Enter keyword" />
-              <button onClick={this.handleSubmit.bind(this)} 
-                className="search-button"> Search </button>
+              <input ref="keyword" type="text" onKeyDown={this.handleSubmit.bind(this)} placeholder="Enter keyword" />
             </div>
                                    )
                                    return(
@@ -276,14 +318,13 @@ class SearchCode extends React.Component{
                                            <div className="logo">
                                              <Link to="app"> <img src="img/logo2.png" /> </Link>
                                            </div>
-                                           <Link to="app"><button className='sign-in'>Login / Register</button></Link>
-                                         </div>
+                                           {displayNav}                                      </div>
                                        </div>
                                        <div className="search-result-wrapper">
                                          {displaySidebar}
                                          <div className="filter-bar-wrapper">
                                            <Filterbar
-                                             categoryFilter={this.handleCategoryFilter.bind(this)}       
+                                             categoryFilter={this.handleCategoryChange.bind(this)}       
                                            />   
                                            {displaySearchBar}
                                            {displayResult}
@@ -297,6 +338,10 @@ class SearchCode extends React.Component{
                                    )
   }
 
+}
+
+SearchCode.contextTypes = {
+  router: React.PropTypes.func.isRequired
 }
 
 module.exports = SearchCode;

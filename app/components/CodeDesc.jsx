@@ -1,5 +1,5 @@
 import React from 'react';
-import Router from 'react-router';
+import Router, {Link} from 'react-router';
 import UserNavbar from './UserNavbar.jsx';
 import API from './API.js';
 import StarRating from 'react-star-rating';
@@ -8,21 +8,52 @@ class CodeDesc extends React.Component{
   constructor(){
     super()
     this.state = {
-      result: {}
+      result: {},
+      isLoadUser: true,
+      isLoadCode: true
     }
   }
+  
   componentDidMount() {
     var id  = this.props.params.id
+    
     var url = API.url('codes',id)
+
+    
     var success = (res) => {
       console.log('success')
       console.log(res)
-      this.setState({result: res})
+      this.setState({result: res,isLoadCode: false})
     }
+
     var failure = function(res) {
       console.log('failure')
     }
+
     API.get(url,success,failure)  
+
+
+    var token = localStorage.codedammit_token
+
+    var _data = {
+      token: token
+    }
+
+    var _url = API.url('tokens/verify_token')
+
+    var _success = (res) => {
+      console.log(res)
+      this.setState({user:res, isLoadUser: false})
+    }
+
+    var _failure = (res) => {
+      console.log("Failed to verify")
+      console.log(res)
+      this.context.router.transitionTo('login')
+    }
+
+    API.post(_url,_data,_success,_failure)
+
   }
 
   handleRate(e, {position, rating, caption, name}) {
@@ -37,7 +68,20 @@ class CodeDesc extends React.Component{
     newEl.innerHTML = "Thanks for rating!"
     x.appendChild(newEl)
   }
-  render(){
+
+  render() {
+    return this.state.isLoadUser && this.state.isLoadCode ? this.renderLoader() : this.renderContent()
+  }
+
+  renderLoader() {
+    return(
+    <div id="loader">
+      <img src="img/loading.gif" />
+      <h1> Loading... Please wait a moment! </h1>
+    </div>
+    )
+  }
+  renderContent(){
     var code = this.state.result
     var lang = _.capitalize(code.language)
     var diff = _.capitalize(code.difficulty)
@@ -46,26 +90,30 @@ class CodeDesc extends React.Component{
       var display = <h3 style={{color: '#db4860'}}> Thanks for rating!</h3>
     else
       var display = <StarRating className="star-rating" name="airbnb-rating" size={20}
-        totalStars={5} onRatingClick={this.handleRate.bind(this)} />
+                     totalStars={5} onRatingClick={this.handleRate.bind(this)} />
 
     if(_.isEmpty(code.app_link))
       var displayButton = (<div className="btn-wrapper">
-                            <button className="link-btn"> View Github </button>
-                            <button className="link-btn"> View Website </button>
-                           </div>
-                          )
+                             <button className="link-btn"> View Github </button>
+                             <button className="link-btn"> View Website </button>
+                            </div>)
     else
       var displayButton = <button className="link-btn"> View Github </button>
-        
-          
-  return(
+
+
+    if(!this.state.isLoadUser)
+      var displayNav = <h1> Welcome, {_.capitalize(this.state.user.username)} </h1>
+    else
+      var displaynav = <Link to="login"><button className='sign-in'>Login / Register</button></Link> 
+
+    return(
       <div  className = 'description-container'>
         <div className="header-wrapper">
           <div className="header">
             <div className="logo">
-              <img src="img/logo2.png" />
+              <Link to="app"><img src="img/logo2.png" /></Link>
             </div>
-            <button className='sign-in'>Login / Register</button>
+            {displayNav}
           </div>
         </div>
         <div className="code-desc-wrapper">
@@ -85,8 +133,11 @@ class CodeDesc extends React.Component{
             {displayButton}
           </div>
         </div>
+        <footer>
+          <h6> Copyright © CodeDammit 2016 </h6>
+        </footer>
       </div>   
-    )
+                                )
   }
 }
 

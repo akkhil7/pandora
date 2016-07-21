@@ -47,7 +47,7 @@ class WebSidebar extends React.Component{
           <li><button data-language = 'javascript' onClick={this.handleLanguageFilter.bind(this)} >Javascript</button></li>
           <li><button data-language = 'clojure' onClick={this.handleLanguageFilter.bind(this)} >Clojure</button></li>
           <li><button data-language = 'haskell' onClick={this.handleLanguageFilter.bind(this)} >Haskell</button></li>
-          <li><button data-language = 'html' onClick={this.handleLanguageFilter.bind(this)} >HTML and CSS</button></li>
+          <li><button data-language = 'html' onClick={this.handleLanguageFilter.bind(this)} >HTML/CSS</button></li>
           <li><button data-language = "go" onClick={this.handleLanguageFilter.bind(this)} >Go</button></li>
         </ul>
         <h3>Difficulty</h3>
