@@ -9,10 +9,6 @@ class CodeResultBox extends React.Component{
 		super()
 	}
 
-	descdisplay(e){
-		var desc = this.state.description
-	}
-
 	render(){
 		var code = this.props.code
 		var language = code.language
@@ -25,12 +21,18 @@ class CodeResultBox extends React.Component{
     else
       var classVar = language
 
+    if(code.description.length > 90)
+      var desc = code.description.substring(0,90)+ "..."
+    else
+      var desc = code.description.substring(0,90)
 		return(
 			<div key={code.id} className="code-result-box">
-			  <h1>{code.name}</h1>
+        <h1>{code.name}</h1>
+        <p>{desc}</p>
 			  <h2 className={classVar}>{code.language}</h2>
 			  <h2 className={code.difficulty}>{code.difficulty}</h2>
-              <Link to='codedesc' params={{id: code.id}}><button>view source</button></Link>
+        <Link to='codedesc' params={{id: code.id}}><button>view source</button></Link>
+
 			</div>
 			)
 	}	
