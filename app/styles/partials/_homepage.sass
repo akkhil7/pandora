@@ -2,8 +2,8 @@
   +span-columns(12 of 12)
   height: 100%
   background: #D38312 
-  background: -webkit-linear-gradient(to top, #556270 , #db4860) 
-  background: linear-gradient(to top, #556270 , #db4860) 
+  background: -webkit-linear-gradient(to top, #ffffff , #ffffff, #db4860) 
+  background: linear-gradient(to bottom, #db4860 1%, #fbe9ec 40%, #ffffff 55%) 
   
 .container
   margin-top: -200px
@@ -14,22 +14,36 @@
 
   img
 
-    +span-columns(2)
+    +span-columns(2.3)
+    height: 30px
+    position: relative
+    bottom: -6px
+    left: 0
 
   .submit
     +span-columns(2.5)
-    +shift(7.5)
+    +shift(7)
     +omega()
     height: 35px
     background-color: #f1a727
     font-size: 0.9em
     box-shadow: 0 1px 3px 0px rgba(0,0,0,0.5)
 
+  .contact-us
+    +span-columns(4.5)
+    +shift(5)
+    +omega()
+    float: right
+    text-align: right
+    font-weight: 200
+    margin-top: 10px
+    color: white
+    font-size: 0.9em
   h3
     clear: both
     padding-top: 100px
-    +span-columns(7)
-    +shift(2.5)
+    +span-columns(8)
+    +shift(2)
     text-align: center
     font-size: 2em
     font-weight: 200
@@ -64,25 +78,54 @@
     color:    white
   
   input:-moz-placeholder
-    color:    #white
+    color:    white
     opacity:  1
   
   input::-moz-placeholder 
-    color:    #white
+    color:    white
     opacity:  1
   
   input:-ms-input-placeholder
-    color:    #white
+    color:    white
     
   .search
     +span-columns(4)
     height: 50px
     margin-top: 60px
-    background-color: rgba(0,0,0,0.3)
-    font-weight: 300
+    color: #db4860
+    background-color: rgba(255,255,255,0)
+    //border-bottom: 2px solid #db4860
+    border-radius: 0
+    font-weight: 400
 
   .search:hover
-    box-shadow: 0px 0px 10px rgba(255,218,12,0.7)
+    //box-shadow: 0px 0px 10px rgba(255,218,12,0.7)
+    transform: translateY(5px)
+    color: white
+    border-radius: 5px
+    border: none
+    transition: transform 200ms ease-in
+
+  .web
+    color: #528efa
+    border-bottom: 2px solid #528efa
+
+  .web:hover
+    background-color: #528efa
+
+  .snippet
+    color: #4becb5
+    border-bottom: 2px solid #4becb5
+
+  .snippet:hover
+    background-color: #4becb5
+
+  .mobile
+    color: #fd9e17
+    border-bottom: 2px solid #fd9e17
+    
+  .mobile:hover
+    background-color: #fd9e17
 
 
 footer
@@ -99,7 +142,7 @@ footer
   
   h6
     +span-columns(12)
-    color: white
+    color: black
     text-align: center
     font-size: 0.8em
     font-weight: 200

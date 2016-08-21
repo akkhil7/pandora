@@ -92,13 +92,17 @@ class CodeDesc extends React.Component{
       var display = <StarRating className="star-rating" name="airbnb-rating" size={20}
                      totalStars={5} onRatingClick={this.handleRate.bind(this)} />
 
-    if(_.isEmpty(code.app_link))
+    if(!_.isEmpty(code.link))
       var displayButton = (<div className="btn-wrapper">
-                             <button className="link-btn"> View Github </button>
-                             <button className="link-btn"> View Website </button>
+        <a href={code.github_link}>
+          <button className="link-btn"> View Github </button> 
+        </a>
+        <a href={code.link}> 
+          <button className="link-btn"> View Website </button> 
+        </a>
                             </div>)
     else
-      var displayButton = <button className="link-btn"> View Github </button>
+      var displayButton = <a href={code.github_link}><button className="link-btn full-width"> View Github </button></a>
 
 
     if(!this.state.isLoadUser)
@@ -107,13 +111,12 @@ class CodeDesc extends React.Component{
       var displaynav = <Link to="login"><button className='sign-in'>Login / Register</button></Link> 
 
     return(
-      <div  className = 'description-container'>
+      <div className = 'description-container'>
         <div className="header-wrapper">
           <div className="header">
             <div className="logo">
               <Link to="app"><img src="img/logo2.png" /></Link>
             </div>
-            {displayNav}
           </div>
         </div>
         <div className="code-desc-wrapper">

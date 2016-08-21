@@ -32,11 +32,11 @@ class HomePage extends React.Component{
       <div id="homepage-wrapper">
         <div className="container">
           <Link to="app"><img src="img/logo2.png" /></Link>
-          <Link to="createcode"><button className="submit"> Submit Your Code </button></Link>
-          <h3>You can find all the <em>"codedamn"</em> gods here.</h3>
-          <button data-type="web" onClick={this.handleClick.bind(this)} className="search"> Web </button>
-          <button data-type="mobile" onClick={this.handleClick.bind(this)} className="search"> Mobile </button>
-          <button data-type="snippet"onClick={this.handleClick.bind(this)} className="search"> Snippets </button>
+          <a href="mailto:admin@codedammit.co"><h6 className="contact-us">Contact Us</h6></a>
+          <h3>You can find all the <em>"codedamn"</em> codes here.</h3>
+          <button data-type="web" onClick={this.handleClick.bind(this)} className="search web"> Web </button>
+          <button data-type="mobile"  onClick={this.handleClick.bind(this)} className="search mobile"> Mobile </button>
+          <button data-type="snippet" onClick={this.handleClick.bind(this)} className="search snippet"> Snippets </button>
         </div>
         <footer>
           <h1> Help us by contributing GitHub codes! </h1>

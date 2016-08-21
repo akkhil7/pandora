@@ -49,6 +49,8 @@ class WebSidebar extends React.Component{
           <li><button data-language = 'haskell' onClick={this.handleLanguageFilter.bind(this)} >Haskell</button></li>
           <li><button data-language = 'html' onClick={this.handleLanguageFilter.bind(this)} >HTML/CSS</button></li>
           <li><button data-language = "go" onClick={this.handleLanguageFilter.bind(this)} >Go</button></li>
+          <li><button data-language = "php" onClick={this.handleLanguageFilter.bind(this)} >PHP</button></li>
+          
         </ul>
         <h3>Difficulty</h3>
         <ul className='sidebar-options'>

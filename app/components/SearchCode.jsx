@@ -265,6 +265,12 @@ class SearchCode extends React.Component{
     var isSnippet = this.state.isSnippet
     var result = this.state.result
 
+    if(!_.isEmpty(result))
+      {
+        var el = document.getElementsByClassName('search-result-wrapper')[0];
+        el.style.height = 'auto';
+      }
+
     if(this.state.isSearching)
       var displayResult = (<div className="loader">
                               <img src="img/loading.gif" />
@@ -317,7 +323,7 @@ class SearchCode extends React.Component{
                                            <div className="logo">
                                              <Link to="app"> <img src="img/logo2.png" /> </Link>
                                            </div>
-                                           {displayNav}                                      </div>
+                                         </div>
                                        </div>
                                        <div className="search-result-wrapper">
                                          {displaySidebar}

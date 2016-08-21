@@ -105,6 +105,7 @@ class CreateCode extends React.Component{
         { value: 'haskell', label: 'Haskell' },
         { value: 'javascript', label: 'Javascript' },
         { value: 'go', label: 'Go' },
+        { value: 'php', label: 'PHP' },
         { value: 'html', label: 'HTML/CSS' }]
 
     else if(category == "mobile")
@@ -122,13 +123,14 @@ class CreateCode extends React.Component{
             { value: 'javascript', label: 'Javascript' },
             { value: 'go', label: 'Go' },
             { value: 'html', label: 'HTML/CSS' }, 
+            { value: 'c', label: 'C' },
             { value: 'c++', label: 'C++' },
             { value: 'c#', label: 'C#' },
             { value: 'java', label: 'Java' }]
 
       var d_options = [
             { value: 'easy', label: 'Easy'},
-            { value: 'meduim', label: 'Medium'},
+            { value: 'medium', label: 'Medium'},
             { value: 'hard', label: 'Hard'}]
 
       var c_options =[
