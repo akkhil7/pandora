@@ -19,7 +19,7 @@ class CodeResultList extends React.Component{
 		var codes = this.props.codes
 		console.log(codes)
 		var display = codes.map(function(code) {
-			return <CodeResultBox code={code} />
+			return <CodeResultBox key={code.id} code={code} />
 		})
 		return(
 			<div onScroll={this.handleInfinite.bind(this)} className="code-result-list">

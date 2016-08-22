@@ -239,6 +239,7 @@ class SearchCode extends React.Component{
     })
   }
 
+
   animateSidebar() {
     var isWeb = this.state.isWeb
     var isMobile = this.state.isMobile

@@ -76,7 +76,7 @@ class CreateCode extends React.Component{
   } 
 
   changeCat(val){
-    this.setState({ category: val})
+    this.setState({ category: val })
   }
 
   render() {
@@ -170,6 +170,7 @@ class CreateCode extends React.Component{
                 value={language}
                 onChange={this.changeLang.bind(this)}
                 options={options}
+                searchable={false}
                 />
               <input ref="app_link" type="text" placeholder="Website (optional)" className="app_link" />
               <input ref="github_link" type="text" placeholder="GitHub URL" className="github_link" />	

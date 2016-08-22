@@ -81,6 +81,10 @@ class CodeDesc extends React.Component{
     </div>
     )
   }
+  previousPage() {
+    console.log(Router.History)
+    this.context.router.goBack();
+  }
   renderContent(){
     var code = this.state.result
     var lang = _.capitalize(code.language)
@@ -110,6 +114,11 @@ class CodeDesc extends React.Component{
     else
       var displaynav = <Link to="login"><button className='sign-in'>Login / Register</button></Link> 
 
+    if(Router.History.length > 1)
+      var goback = <button className="goback" onClick={this.previousPage.bind(this)}> <b>&lt;-</b> Go Back</button>
+    else
+      var goback = ""
+      
     return(
       <div className = 'description-container'>
         <div className="header-wrapper">
@@ -120,6 +129,7 @@ class CodeDesc extends React.Component{
           </div>
         </div>
         <div className="code-desc-wrapper">
+          {goback}
           <div className="code-desc-header">
             <h1>{code.name}</h1>
             <p>{code.description}</p>
@@ -142,6 +152,10 @@ class CodeDesc extends React.Component{
       </div>   
                                 )
   }
+}
+
+CodeDesc.contextTypes = {
+  router: React.PropTypes.func.isRequired
 }
 
 module.exports = CodeDesc;
