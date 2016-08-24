@@ -267,10 +267,16 @@ class SearchCode extends React.Component{
     var result = this.state.result
 
     if(!_.isEmpty(result))
-      {
+    {
         var el = document.getElementsByClassName('search-result-wrapper')[0];
         el.style.height = 'auto';
-      }
+    }
+    else
+    {
+        var el = document.getElementsByClassName('search-result-wrapper')[0];
+        //el.style.height = '100%';
+        console.log(el)
+    }
 
     if(this.state.isSearching)
       var displayResult = (<div className="loader">

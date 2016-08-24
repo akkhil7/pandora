@@ -49,7 +49,7 @@ class CodeDesc extends React.Component{
     var _failure = (res) => {
       console.log("Failed to verify")
       console.log(res)
-      this.context.router.transitionTo('login')
+      
     }
 
     API.post(_url,_data,_success,_failure)
